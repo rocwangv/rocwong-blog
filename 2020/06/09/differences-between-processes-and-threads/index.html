@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>深入理解浏览器系列之进程与线程之间的区别 | RocWong&#39;s Blog</title>
+  
+  <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+  <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar" class="pure"></div>
+</div>
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header pure">
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          RocWong's Blog
+        
+      </a>
+			<div class="menu">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a id="home" class="nav flat-box" href="/">
+									<i class="fas fa-home fa-fw"></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="archives" class="nav flat-box" href="/archives/">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="books" class="nav flat-box" href="/books/">
+									<i class="fas fa-book fa-fw"></i>&nbsp;书单
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="mind" class="nav flat-box" href="/mind/">
+									<i class="fas fa-bolt fa-fw"></i>&nbsp;思维
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="project" class="nav flat-box" href="/project/">
+									<i class="fas fa-gavel fa-fw"></i>&nbsp;项目
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="friends" class="nav flat-box" href="/friends/">
+									<i class="fas fa-users fa-fw"></i>&nbsp;朋友
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="about" class="nav flat-box" href="/about/">
+									<i class="fas fa-user fa-fw"></i>&nbsp;关于
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<span class="icon"><i class="fas fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+				<li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu">
+      <ul>
+          
+              
+                  <li>
+										<a id="home" class="nav flat-box" href="/">
+											<i class="fas fa-home fa-fw"></i>&nbsp;主页
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="archives" class="nav flat-box" href="/archives/">
+											<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="books" class="nav flat-box" href="/books/">
+											<i class="fas fa-book fa-fw"></i>&nbsp;书单
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="mind" class="nav flat-box" href="/mind/">
+											<i class="fas fa-bolt fa-fw"></i>&nbsp;思维
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="project" class="nav flat-box" href="/project/">
+											<i class="fas fa-gavel fa-fw"></i>&nbsp;项目
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="friends" class="nav flat-box" href="/friends/">
+											<i class="fas fa-users fa-fw"></i>&nbsp;朋友
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="about" class="nav flat-box" href="/about/">
+											<i class="fas fa-user fa-fw"></i>&nbsp;关于
+										</a>
+                  </li>
+              
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+  
+<section class="meta">
+  
+  
+  <div class="meta" id="header-meta">
+    
+      
+          <h1 class="title">深入理解浏览器系列之进程与线程之间的区别</h1>
+      
+    
+
+    <div class="new-meta-box">
+      
+        <div class="new-meta-item author">
+          <a href="http://www.rocwong.cn">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            RocWong
+          </a>
+        </div>
+      
+      
+        <div class="new-meta-item date">
+          <a class="notlink">
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+            2020-06-09
+          </a>
+        </div>
+      
+      
+        
+          
+          <div class="new-meta-item category">
+            <a href="/categories/浏览器/">
+              <i class="fas fa-folder-open" aria-hidden="true"></i>
+              浏览器
+            </a>
+          </div>
+        
+      
+      
+        
+          <div class="new-meta-item browse busuanzi">
+            <a class="notlink">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+              <span id="busuanzi_value_page_pv">
+                <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        
+      
+      
+    </div>
+    <hr>
+  </div>
+</section>
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/browser/process-thread.png" alt="banner"></p>
+<a id="more"></a>
+<h2 id="什么是进程？什么是线程？"><a href="#什么是进程？什么是线程？" class="headerlink" title="什么是进程？什么是线程？"></a>什么是进程？什么是线程？</h2><h3 id="进程的定义"><a href="#进程的定义" class="headerlink" title="进程的定义"></a>进程的定义</h3><p>进程是执行中的一段程序，即一旦程序被载入到内存中并准备执行，它就是一个进程。进程是表示资源分配的基本概念，又是调度运行的基本单位，是系统中的并发执行的单位。</p>
+<h3 id="线程的定义"><a href="#线程的定义" class="headerlink" title="线程的定义"></a>线程的定义</h3><p>单个进程中执行的每个任务就是一个线程。线程是进程中执行运算的最小单位。<br>一个线程只能属于一个进程，但是一个进程可以拥有多个线程。多线程处理就是允许一个进程中在同一时刻执行多个任务。</p>
+<p>可以结合下图来理解二者之间的关系：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/browser/cartoon-process-thread.jpg" alt="图说进程和线程"></p>
+<h2 id="进程-VS-线程"><a href="#进程-VS-线程" class="headerlink" title="进程 VS 线程"></a>进程 VS 线程</h2><p>首先，我们知道浏览器在处理任务时，使用并行处理相较串行处理而言可以大大提升性能。对应到线程里面来讲，也就是单线程就是串行，多线程就可以实现并行。线程是依附于进程的，而进程中使用多线程并行处理就能提升运算效率。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/browser/single-vs-many-threads.png" alt="单线程和多线程"></p>
+<p>总结来说，进程和线程的关系有以下4个特点：</p>
+<ul>
+<li>进程中的任意一个线程执行出错，都会导致整个进程的崩溃；</li>
+<li>线程之间共享进程中的数据；</li>
+<li>当一个进程关闭后，操作系统会回收进程所占用的内存；</li>
+<li>进程之间的内容相互隔离，如果进程之间需要通信则需使用IPC。</li>
+</ul>
+<h2 id="单进程浏览器时代"><a href="#单进程浏览器时代" class="headerlink" title="单进程浏览器时代"></a>单进程浏览器时代</h2><blockquote>
+<p>单进程浏览器是指浏览器的所有功能模块都是运行在同一个进程里。这些模块包含了网络、插件、js运行环境、渲染引擎和页面等。</p>
+</blockquote>
+<p>单进程浏览器的弊端：</p>
+<ul>
+<li>不稳定；</li>
+</ul>
+<p>若插件崩溃或者内存泄露时，容易阻塞浏览器主进程造成浏览器崩溃；</p>
+<ul>
+<li>不流畅；</li>
+</ul>
+<p>若js运行环境中有特别耗时，如执行了一个无限循环脚本，它会独占整个县城，导致真个浏览器失去响应、卡顿等。</p>
+<ul>
+<li>不安全；</li>
+</ul>
+<p>插件模块在主进程中，可以获取到操作系统的任意资源，这就给了恶意插件入侵电脑的可趁之机。</p>
+<h2 id="多进程浏览器时代"><a href="#多进程浏览器时代" class="headerlink" title="多进程浏览器时代"></a>多进程浏览器时代</h2><h3 id="早期的多进程架构"><a href="#早期的多进程架构" class="headerlink" title="早期的多进程架构"></a>早期的多进程架构</h3><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/browser/early-many-process.png" alt="早期的多进程架构"></p>
+<p>上图是2008年Chrome发布时的进程架构。从图中可以看出，Chrome的页面是运行在单独的渲染进程中的，同时页面里的插件也是运行的单独的插件进程中的，而进程之间的通信依赖IPC。</p>
+<p>多进程浏览器很好的解决了上述的三个问题：</p>
+<ol>
+<li>由于进程是相互隔离的，所以某个进程的崩溃不影响浏览器和其他页面。</li>
+<li>js也是运行在渲染进程中的，所以即使JS阻塞了渲染进程，也不影响其他页面。</li>
+<li>采用多进程架构的额外好处是可以使用<strong>安全沙箱</strong>，你可以把沙箱看成是操作系统给进程上了一把锁，沙箱里面的程序可以运行，但是不能在你的硬盘上写入任何数据，也不能在敏感位置读取任何数据，例如你的文档和桌面。Chrome 把插件进程和渲染进程锁在沙箱里面，这样即使在渲染进程或者插件进程里面执行了恶意程序，恶意程序也无法突破沙箱去获取系统权限。</li>
+</ol>
+<h3 id="目前多进程架构"><a href="#目前多进程架构" class="headerlink" title="目前多进程架构"></a>目前多进程架构</h3><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/browser/latest-many-process.png" alt="目前多进程架构"></p>
+<p>从图中可以看出，最新的 Chrome 浏览器包括：1 个浏览器（Browser）主进程、1 个 GPU 进程、1 个网络（NetWork）进程、多个渲染进程和多个插件进程。</p>
+<ul>
+<li><strong>浏览器进程</strong>。主要负责界面显示、用户交互、子进程管理，同时提供存储等功能。</li>
+<li><strong>渲染进程</strong>。核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页，排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中，默认情况下，Chrome 会为每个 Tab 标签创建一个渲染进程。出于安全考虑，渲染进程都是运行在沙箱模式下。</li>
+<li><strong>GPU 进程</strong>。其实，Chrome 刚开始发布的时候是没有 GPU 进程的。而 GPU 的使用初衷是为了实现 3D CSS 的效果，只是随后网页、Chrome 的 UI 界面都选择采用 GPU 来绘制，这使得 GPU 成为浏览器普遍的需求。最后，Chrome 在其多进程架构上也引入了 GPU 进程。</li>
+<li><strong>网络进程</strong>。主要负责页面的网络资源加载，之前是作为一个模块运行在浏览器进程里面的，直至最近才独立出来，成为一个单独的进程。</li>
+<li><strong>插件进程</strong>。主要是负责插件的运行，因插件易崩溃，所以需要通过插件进程来隔离，以保证插件进程崩溃不会对浏览器和页面造成影响。</li>
+</ul>
+<p>多进程模型的弊端：</p>
+<ul>
+<li>更高的资源占用；</li>
+<li>更复杂的体系结构；</li>
+</ul>
+<h2 id="未来面向服务的架构"><a href="#未来面向服务的架构" class="headerlink" title="未来面向服务的架构"></a>未来面向服务的架构</h2><p>为了解决这些问题，在 2016 年，Chrome 官方团队使用“面向服务的架构”（Services Oriented Architecture，简称 SOA）的思想设计了新的 Chrome 架构。也就是说 Chrome 整体架构会朝向现代操作系统所采用的“面向服务的架构” 方向发展，原来的各种模块会被重构成独立的服务（Service），每个服务（Service）都可以在独立的进程中运行，访问服务（Service）必须使用定义好的接口，通过 IPC 来通信，从而构建一个更内聚、松耦合、易于维护和扩展的系统，更好实现 Chrome 简单、稳定、高速、安全的目标。</p>
+<p>Chrome 最终要把 UI、数据库、文件、设备、网络等模块重构为基础服务，类似操作系统底层服务，下面是 Chrome“面向服务的架构”的进程模型图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/browser/face-to-service-many-process.png" alt="未来面向服务的架构"></p>
+
+      </div>
+        
+          <section class="meta" id="footer-meta">
+            <hr>
+            <div class="new-meta-box">
+              
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-01T18:08:09+08:00">
+                  <a class="notlink">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    2020-08-01
+                  </a>
+                </div>
+              
+              
+                
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/进程与线程/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;进程与线程</a></div>
+              
+              
+            </div>
+          </section>
+        
+
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h4>
+                                <a href="/2020/06/11/puppeteer-for-dinner/" rel="prev" title="使用 puppeteer 为自己和团队内的小伙伴定一份可口的晚餐">
+                                  
+                                      使用 puppeteer 为自己和团队内的小伙伴定一份可口的晚餐
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/puppeteer/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>puppeteer</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2020/06/09/design-pattern-singleton/" rel="prev" title="漫谈设计模式之单例模式">
+                                    
+                                        漫谈设计模式之单例模式
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/单例模式/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>单例模式</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      
+      
+        <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+        
+        
+        
+          
+            <section id="comments">
+              <div id="valine_container" class="valine_thread">
+                <i class="fas fa-spinner fa-spin fa-fw"></i>
+              </div>
+            </section>
+          
+        
+      
+    </section>
+  </article>
+
+
+
+<script>
+    window.subData = {
+        title: '深入理解浏览器系列之进程与线程之间的区别',
+        tools: true
+    }
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+  
+  
+    
+      
+      
+        <section class="author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/avatar/avatar.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:me@rocwong.cn" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-envelope" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://github.com/rocwong-cn" class="social flat-btn" target="_blank" rel="external"><i class="social fab fa-github" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=64405940" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-music" aria-hidden="true"></i></a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是进程？什么是线程？"><span class="toc-text">什么是进程？什么是线程？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的定义"><span class="toc-text">进程的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的定义"><span class="toc-text">线程的定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程-VS-线程"><span class="toc-text">进程 VS 线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单进程浏览器时代"><span class="toc-text">单进程浏览器时代</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多进程浏览器时代"><span class="toc-text">多进程浏览器时代</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#早期的多进程架构"><span class="toc-text">早期的多进程架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目前多进程架构"><span class="toc-text">目前多进程架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未来面向服务的架构"><span class="toc-text">未来面向服务的架构</span></a></li></ol>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/HTML5/" style="font-size: 14px; color: #999">HTML5</a> <a href="/tags/JS/" style="font-size: 24px; color: #555">JS</a> <a href="/tags/Jenkins/" style="font-size: 14px; color: #999">Jenkins</a> <a href="/tags/React-Native/" style="font-size: 14px; color: #999">React-Native</a> <a href="/tags/android/" style="font-size: 14px; color: #999">android</a> <a href="/tags/canvas/" style="font-size: 14px; color: #999">canvas</a> <a href="/tags/centos/" style="font-size: 14px; color: #999">centos</a> <a href="/tags/puppeteer/" style="font-size: 14px; color: #999">puppeteer</a> <a href="/tags/react/" style="font-size: 14px; color: #999">react</a> <a href="/tags/位移运算/" style="font-size: 14px; color: #999">位移运算</a> <a href="/tags/单例模式/" style="font-size: 14px; color: #999">单例模式</a> <a href="/tags/原型链/" style="font-size: 14px; color: #999">原型链</a> <a href="/tags/又是一年/" style="font-size: 19px; color: #777">又是一年</a> <a href="/tags/好物推荐/" style="font-size: 14px; color: #999">好物推荐</a> <a href="/tags/工厂模式/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/数据结构/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/构建工具/" style="font-size: 14px; color: #999">构建工具</a> <a href="/tags/柯里化/" style="font-size: 14px; color: #999">柯里化</a> <a href="/tags/观察者模式/" style="font-size: 14px; color: #999">观察者模式</a> <a href="/tags/读书笔记/" style="font-size: 19px; color: #777">读书笔记</a> <a href="/tags/进程与线程/" style="font-size: 14px; color: #999">进程与线程</a> <a href="/tags/面试经历/" style="font-size: 14px; color: #999">面试经历</a>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;所有分类</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/fabricjs/" href="/categories/fabricjs/"><div class="name">fabricjs</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/基础原理/" href="/categories/基础原理/"><div class="name">基础原理</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/学习笔记/" href="/categories/学习笔记/"><div class="name">学习笔记</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/年终总结/" href="/categories/年终总结/"><div class="name">年终总结</div><div class="badge">(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/微前端/" href="/categories/微前端/"><div class="name">微前端</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/我爱折腾/" href="/categories/我爱折腾/"><div class="name">我爱折腾</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/服务器操作/" href="/categories/服务器操作/"><div class="name">服务器操作</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/每日一题/" href="/categories/每日一题/"><div class="name">每日一题</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/浏览器/" href="/categories/浏览器/"><div class="name">浏览器</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/移动端开发/" href="/categories/移动端开发/"><div class="name">移动端开发</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/算法相关/" href="/categories/算法相关/"><div class="name">算法相关</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/编码规范/" href="/categories/编码规范/"><div class="name">编码规范</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/装机必备/" href="/categories/装机必备/"><div class="name">装机必备</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/设计模式/" href="/categories/设计模式/"><div class="name">设计模式</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/进阶心法/" href="/categories/进阶心法/"><div class="name">进阶心法</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/项目部署/" href="/categories/项目部署/"><div class="name">项目部署</div><div class="badge">(3)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+      
+    
+  
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+    </div>
+    <footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:me@rocwong.cn" class="social fas fa-envelope flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://github.com/rocwong-cn" class="social fab fa-github flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://music.163.com/#/user/home?id=64405940" class="social fas fa-music flat-btn" target="_blank" rel="external"></a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>本站使用 <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a> 作为主题，总访问量为 <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+  </div>
+  <div><a href="http://www.beian.miit.gov.cn/" rel="nofollow">京ICP备18022839号-1</a></div>
+</footer>
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        const $reveal = $('.reveal');
+    		if ($reveal.length === 0) return;
+    		const sr = ScrollReveal({ distance: 0 });
+    		sr.reveal('.reveal');
+      });
+    </script>
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        Waves.attach('.flat-btn', ['waves-button']);
+        Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+        Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+        Waves.attach('.flat-box', ['waves-block']);
+        Waves.attach('.float-box', ['waves-block', 'waves-float']);
+        Waves.attach('.waves-image');
+        Waves.init();
+      });
+    </script>
+  
+  
+    <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+  
+  
+  
+
+  
+  
+    
+      
+      
+      
+        
+          <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+          
+            
+              <script src="/js/volantis.js"></script>
+            
+          
+          <script>
+          var GUEST_INFO = ['nick','mail','link'];
+          var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var notify = 'false' == true;
+          var verify = 'false' == true;
+          var valine = new Valine();
+          valine.init({
+            el: '#valine_container',
+            notify: notify,
+            verify: verify,
+            guest_info: guest_info,
+            
+            appId: "gYp5OOFzzylucF3XlyJk6T5a-gzGzoHsz",
+            appKey: "fzh2pJLE0OYsBEt718W40wfB",
+            placeholder: "快来评论吧~",
+            pageSize:'10',
+            avatar:'monsterid',
+            lang:'zh-cn',
+            highlight:''
+          })
+          </script>
+        
+      
+    
+  
+  
+    <script src="/js/app.js"></script>
+<script src="/js/search.js"></script>
+  
+
+
+
+
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
