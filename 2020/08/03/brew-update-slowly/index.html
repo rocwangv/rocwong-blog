@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>2017年终总结 | RocWong&#39;s Blog</title>
+  <title>解决 brew update 时间太久的问题 | RocWong&#39;s Blog</title>
   
   <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
   
@@ -196,7 +196,7 @@
   <div class="meta" id="header-meta">
     
       
-          <h1 class="title">2017年终总结</h1>
+          <h1 class="title">解决 brew update 时间太久的问题</h1>
       
     
 
@@ -213,7 +213,7 @@
         <div class="new-meta-item date">
           <a class="notlink">
             <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-            2017-12-29
+            2020-08-03
           </a>
         </div>
       
@@ -221,9 +221,9 @@
         
           
           <div class="new-meta-item category">
-            <a href="/categories/年终总结/">
+            <a href="/categories/装机必备/">
               <i class="fas fa-folder-open" aria-hidden="true"></i>
-              年终总结
+              装机必备
             </a>
           </div>
         
@@ -248,35 +248,35 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <blockquote><p>动荡的一年。</p>
-</blockquote>
-<p>&emsp;&emsp;每到临近年终，心里都有一种失落的感觉，这种失落感既来于年初给自己定的目标很多没有实现，也源于在很多机遇来临的时候没有好好把握。</p>
-<a id="more"></a>
-<p><strong>&gt; 外部因素</strong>：<br>16年底进入的元银在17年初黄了，被老东家丰瑞祥召回，屋漏偏逢连夜雨，丰瑞祥在10月份资金链断裂，发不出工资，大批量裁员，我也离职了，来到了文思。</p>
-<p><strong>&gt; 工作方面</strong>：<br>在技术的成长反面，今年是我进步最慢的一年，对自己十分不满意。做了一年的RN+react，想起去年给自己定下要征服android，迈进全栈的计划，对自己失望。</p>
+        <p>你是否还在因为使用 <code>brew install</code> 时卡在 <code>update</code> 阶段而捶胸顿足，甚至一度想放弃<code>brew</code>，那么今天你的救星来啦~</p>
+ <a id="more"></a>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用 <code>brew install</code> 时会触发 <code>brew update</code>，而update阶段主要是进行<code>homebrew-cask</code> 和 <code>homebrew-core</code> 及一些其他相关依赖的更新，这些依赖都托管在GitHub，由于国内网络访问GitHub本身就比较慢，做大文件下载的速度可想而知会更慢。</p>
+<h2 id="初步分析"><a href="#初步分析" class="headerlink" title="初步分析"></a>初步分析</h2><p>使用brew update –verbose观察update过程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">brew update --verbose</span><br><span class="line">Checking <span class="keyword">if</span> we need to fetch /usr/<span class="built_in">local</span>/Homebrew...</span><br><span class="line">Checking <span class="keyword">if</span> we need to fetch /usr/<span class="built_in">local</span>/Homebrew/Library/Taps/caskroom/homebrew-fonts...</span><br><span class="line">Fetching /usr/<span class="built_in">local</span>/Homebrew...</span><br><span class="line">Checking <span class="keyword">if</span> we need to fetch /usr/<span class="built_in">local</span>/Homebrew/Library/Taps/homebrew/homebrew-cask...</span><br><span class="line">Checking <span class="keyword">if</span> we need to fetch /usr/<span class="built_in">local</span>/Homebrew/Library/Taps/homebrew/homebrew-core...</span><br><span class="line">Fetching /usr/<span class="built_in">local</span>/Homebrew/Library/Taps/homebrew/homebrew-cask...</span><br><span class="line">Fetching /usr/<span class="built_in">local</span>/Homebrew/Library/Taps/homebrew/homebrew-core...</span><br><span class="line">remote: Enumerating objects: 337, <span class="keyword">done</span>.</span><br><span class="line">remote: Counting objects: 100% (337/337), <span class="keyword">done</span>.</span><br><span class="line">remote: Compressing objects: 100% (88/88), <span class="keyword">done</span>.</span><br><span class="line">remote: Total 298 (delta 221), reused 287 (delta 210), pack-reused 0</span><br><span class="line">Receiving objects: 100% (298/298), 50.91 KiB | 39.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Resolving deltas: 100% (221/221), completed with 39 <span class="built_in">local</span> objects.</span><br><span class="line">From https://github.com/Homebrew/homebrew-core</span><br><span class="line">   65a45a9..583b7f1  master     -&gt; origin/master</span><br><span class="line">remote: Enumerating objects: 179429, <span class="keyword">done</span>.</span><br><span class="line">remote: Counting objects: 100% (179429/179429), <span class="keyword">done</span>.</span><br><span class="line">remote: Compressing objects: 100% (56607/56607), <span class="keyword">done</span>.</span><br><span class="line">Receiving objects:   4% (7628/177189), 1.48 MiB | 8.00 KiB/s</span><br></pre></td></tr></table></figure>
+<p>可以发现在从 GitHub fetch 资源时是最罪恶根源。</p>
+<h2 id="解决方案两步走"><a href="#解决方案两步走" class="headerlink" title="解决方案两步走"></a>解决方案两步走</h2><h3 id="step-one-更换Homebrew源"><a href="#step-one-更换Homebrew源" class="headerlink" title="step one. 更换Homebrew源"></a>step one. 更换Homebrew源</h3><p>目前国内比较好用的brew源有很多，比较推荐使用<em>清华大学开源软件镜像站</em>的，以下是详细配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># brew 程序本身，Homebrew/Linuxbrew 相同</span></span><br><span class="line">git -C <span class="string">"<span class="variable">$(brew --repo)</span>"</span> remote <span class="built_in">set</span>-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下针对 mac OS 系统上的 Homebrew</span></span><br><span class="line">git -C <span class="string">"<span class="variable">$(brew --repo homebrew/core)</span>"</span> remote <span class="built_in">set</span>-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git</span><br><span class="line">git -C <span class="string">"<span class="variable">$(brew --repo homebrew/cask)</span>"</span> remote <span class="built_in">set</span>-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下这两个命令行可以不执行，不影响最终结果</span></span><br><span class="line">git -C <span class="string">"<span class="variable">$(brew --repo homebrew/cask-fonts)</span>"</span> remote <span class="built_in">set</span>-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask-fonts.git</span><br><span class="line">git -C <span class="string">"<span class="variable">$(brew --repo homebrew/cask-drivers)</span>"</span> remote <span class="built_in">set</span>-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask-drivers.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下针对 Linux 系统上的 Linuxbrew</span></span><br><span class="line">git -C <span class="string">"<span class="variable">$(brew --repo homebrew/core)</span>"</span> remote <span class="built_in">set</span>-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/linuxbrew-core.git</span><br></pre></td></tr></table></figure>
+<p>配置完成后，可以到对应的目录下查看<code>git remote</code>配置，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/Homebrew/Library/Taps/homebrew/homebrew-core</span><br><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<p>看到显示为如下的结果说明已经配置成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">origin	https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git (fetch)</span><br><span class="line">origin	https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git (push)</span><br></pre></td></tr></table></figure>
+<h3 id="step-two-更换-Homebrew-bottles-镜像（影响软件下载速度）"><a href="#step-two-更换-Homebrew-bottles-镜像（影响软件下载速度）" class="headerlink" title="step two. 更换 Homebrew-bottles 镜像（影响软件下载速度）"></a>step two. 更换 Homebrew-bottles 镜像（影响软件下载速度）</h3><p>临时替换</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles</span><br></pre></td></tr></table></figure>
+<p>永久替换</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles'</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>至此，已经完成了brew源的切换，可以运行 <code>brew update</code> 测试是否正常。</p>
+<p>参考链接：</p>
 <ul>
-<li>使用RN &amp; react-navigation &amp; redux封装了一个脚手架，比起官网例子更简单易懂，目前在github上的star 达到21个。</li>
-<li>学习mobx的过程中，使用RN &amp; mobx &amp; react-native-router-flux开发了一个简单的APP (ASimpleApp),也开源在了GitHub。</li>
-<li>使用react重构了公司原来的前端框架，并开源了自己使用node部署react/vue项目的服务端部署方案。</li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/" target="_blank" rel="noopener">Homebrew/Linuxbrew 镜像使用帮助 - 清华大学开源软件镜像站</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/homebrew-bottles/" target="_blank" rel="noopener">Homebrew-bottles 镜像使用帮助 - 清华大学开源软件镜像站</a></li>
 </ul>
-<p><strong>&gt; 生活方面</strong>：</p>
-<ul>
-<li>还是单身狗，汪汪汪！！！！！！</li>
-<li>学会了红烧肉，大盘鸡，学会了做鱼。</li>
-<li>几乎要放弃LOL了，吃鸡真好玩！</li>
-<li>一个人的日子过够了啊！</li>
-<li>学会了滑板，虽然快被摔死了，虽然右腿膝盖上留下了一块很大的疤痕。</li>
-<li>自己的脾气今年有好那么一点点，学会克制。</li>
-</ul>
-<p><strong>&gt; 新年寄语</strong>：</p>
-<ul>
-<li>改改自己的臭脾气吧，不然真的孤独终老了！</li>
-<li>致力于学习原生JS和nodeJs，至少要看三本技术方面的书，并且po出读书笔记！</li>
-<li>一！定！要！勤跑步，经常运动，不要做一个死肥宅了啊！</li>
-<li>晚上十二点之前一定要睡觉啊，奔三了啊，身体不比当年了啊！</li>
-<li>碰见喜欢的女孩子，一定要勇敢一点表达出来啊！</li>
-<li>总之吧，新的一年，新的开始，一定要比去年好，要有长足的进步，不要让明年写年终总结的时候又这样尴尬的凑字了啊啊啊！！</li>
-</ul>
+<h2 id="异常情况"><a href="#异常情况" class="headerlink" title="异常情况"></a>异常情况</h2><h3 id="homebrew-versions-相关报错"><a href="#homebrew-versions-相关报错" class="headerlink" title="homebrew-versions 相关报错"></a>homebrew-versions 相关报错</h3><p>如果在执行<code>brew update</code>时出现如下报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fatal: could not <span class="built_in">read</span> Username <span class="keyword">for</span> <span class="string">'https://github.com'</span>: terminal prompts disabled</span><br><span class="line">Error: Fetching /usr/<span class="built_in">local</span>/Homebrew/Library/Taps/homebrew/homebrew-versions failed!</span><br></pre></td></tr></table></figure>
+<p>说明你的brew版本太老旧了，在新版中<code>homebrew-versions</code>已经被移除了，可以执行如下命令来移除它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew untap homebrew/versions</span><br></pre></td></tr></table></figure>
+<p>参考链接：<a href="https://discourse.brew.sh/t/error-running-brew-update/7754" target="_blank" rel="noopener">Error running brew update</a></p>
+<h3 id="homebrew-cask-fonts-相关报错"><a href="#homebrew-cask-fonts-相关报错" class="headerlink" title="homebrew-cask-fonts 相关报错"></a>homebrew-cask-fonts 相关报错</h3><p>当执行上述的<code>git -C &quot;$(brew --repo homebrew/cask-fonts)&quot; remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask-fonts.git</code> 命令时，如出现下方错误，则可以忽略错误，并不执行该命令，不影响最终体验。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: Cannot change to <span class="string">'/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-fonts'</span>: No such file or directory</span><br></pre></td></tr></table></figure>
 
       </div>
         
@@ -284,16 +284,16 @@
             <hr>
             <div class="new-meta-box">
               
-                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-01T18:08:09+08:00">
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-03T21:49:11+08:00">
                   <a class="notlink">
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                    2020-08-01
+                    2020-08-03
                   </a>
                 </div>
               
               
                 
-                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/又是一年/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;又是一年</a></div>
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Homebrew/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;Homebrew</a></div>
               
               
             </div>
@@ -303,40 +303,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                            <h4>
-                                <a href="/2018/03/27/学习笔记一/" rel="prev" title="学习笔记一">
-                                  
-                                      学习笔记一
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/JS/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>JS</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2017/08/11/react项目在服务端部署方案/" rel="prev" title="react项目在服务端部署方案">
+                                <a href="/2020/08/01/baidu-fe-interview/" rel="prev" title="百度前端（内部财务方向）线下测试题分析20200720">
                                     
-                                        react项目在服务端部署方案
+                                        百度前端（内部财务方向）线下测试题分析20200720
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/react/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>react</a>
+                                    <a class="tag" href="/tags/面试经历/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>面试经历</a>
                                 </h6>
                             
                         </span>
@@ -382,7 +363,7 @@
 
 <script>
     window.subData = {
-        title: '2017年终总结',
+        title: '解决 brew update 时间太久的问题',
         tools: true
     }
 </script>
@@ -431,6 +412,20 @@
       
       
         
+  <section class="toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初步分析"><span class="toc-text">初步分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案两步走"><span class="toc-text">解决方案两步走</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#step-one-更换Homebrew源"><span class="toc-text">step one. 更换Homebrew源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#step-two-更换-Homebrew-bottles-镜像（影响软件下载速度）"><span class="toc-text">step two. 更换 Homebrew-bottles 镜像（影响软件下载速度）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常情况"><span class="toc-text">异常情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#homebrew-versions-相关报错"><span class="toc-text">homebrew-versions 相关报错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#homebrew-cask-fonts-相关报错"><span class="toc-text">homebrew-cask-fonts 相关报错</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
 
       
     
