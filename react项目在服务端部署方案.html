@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>react项目在服务端部署方案 | RocWong&#39;s Blog</title>
+  
+  <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+  <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar" class="pure"></div>
+</div>
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header pure">
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          RocWong's Blog
+        
+      </a>
+			<div class="menu">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a id="home" class="nav flat-box" href="/">
+									<i class="fas fa-home fa-fw"></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="archives" class="nav flat-box" href="/archives/">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="books" class="nav flat-box" href="/books/">
+									<i class="fas fa-book fa-fw"></i>&nbsp;书单
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="mind" class="nav flat-box" href="/mind/">
+									<i class="fas fa-bolt fa-fw"></i>&nbsp;思维
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="project" class="nav flat-box" href="/project/">
+									<i class="fas fa-gavel fa-fw"></i>&nbsp;项目
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="friends" class="nav flat-box" href="/friends/">
+									<i class="fas fa-users fa-fw"></i>&nbsp;朋友
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="about" class="nav flat-box" href="/about/">
+									<i class="fas fa-user fa-fw"></i>&nbsp;关于
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<span class="icon"><i class="fas fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+				<li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu">
+      <ul>
+          
+              
+                  <li>
+										<a id="home" class="nav flat-box" href="/">
+											<i class="fas fa-home fa-fw"></i>&nbsp;主页
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="archives" class="nav flat-box" href="/archives/">
+											<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="books" class="nav flat-box" href="/books/">
+											<i class="fas fa-book fa-fw"></i>&nbsp;书单
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="mind" class="nav flat-box" href="/mind/">
+											<i class="fas fa-bolt fa-fw"></i>&nbsp;思维
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="project" class="nav flat-box" href="/project/">
+											<i class="fas fa-gavel fa-fw"></i>&nbsp;项目
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="friends" class="nav flat-box" href="/friends/">
+											<i class="fas fa-users fa-fw"></i>&nbsp;朋友
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="about" class="nav flat-box" href="/about/">
+											<i class="fas fa-user fa-fw"></i>&nbsp;关于
+										</a>
+                  </li>
+              
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+  
+<section class="meta">
+  
+  
+  <div class="meta" id="header-meta">
+    
+      
+          <h1 class="title">react项目在服务端部署方案</h1>
+      
+    
+
+    <div class="new-meta-box">
+      
+        <div class="new-meta-item author">
+          <a href="http://www.rocwong.cn">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            RocWong
+          </a>
+        </div>
+      
+      
+        <div class="new-meta-item date">
+          <a class="notlink">
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+            2017-08-11
+          </a>
+        </div>
+      
+      
+        
+          
+          <div class="new-meta-item category">
+            <a href="/categories/项目部署/">
+              <i class="fas fa-folder-open" aria-hidden="true"></i>
+              项目部署
+            </a>
+          </div>
+        
+      
+      
+        
+          <div class="new-meta-item browse busuanzi">
+            <a class="notlink">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+              <span id="busuanzi_value_page_pv">
+                <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        
+      
+      
+    </div>
+    <hr>
+  </div>
+</section>
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h2 id="一、环境搭建"><a href="#一、环境搭建" class="headerlink" title="一、环境搭建"></a>一、环境搭建</h2><h3 id="1、node-环境安装"><a href="#1、node-环境安装" class="headerlink" title="1、node 环境安装"></a>1、node 环境安装</h3><ul>
+<li>登录到你的linux服务器上（针对于64位的服务器来说），然后在当前目录依次执行：</li>
+</ul>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir node</span><br><span class="line">cd node</span><br><span class="line">wget https://nodejs.org/dist/v6.11.2/node-v6.11.2-linux-x64.tar.xz</span><br><span class="line">xz -d node-v6.11.2-linux-x64.tar.xz</span><br><span class="line">tar xvf node-v6.11.2-linux-x64.tar</span><br><span class="line">mv node-v6.11.2-linux-x64 node-v6.11.2</span><br><span class="line">ln -s /usr/local/node/node-v6.11.2/bin/node  /usr/local/bin/node</span><br><span class="line">ln -s /usr/local/node/node-v6.11.2/bin/npm  /usr/local/bin/npm</span><br></pre></td></tr></table></figure>
+<ul>
+<li>至此，node环境已经安装完毕，可以通过<code>node -v</code>来检查是否安装成功。</li>
+</ul>
+<h3 id="2、配置node环境变量"><a href="#2、配置node环境变量" class="headerlink" title="2、配置node环境变量"></a>2、配置node环境变量</h3><blockquote>
+<p>很重要！ 如果不配置环境变量，有些通过npm安装的CLI会找不到。</p>
+</blockquote>
+<ul>
+<li>首先进入配置文件：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
+<ul>
+<li>按 <strong>i</strong> 键进入编辑模式，进入文件末尾添加：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NODE_HOME=/usr/local/node/node-v6.11.2/bin</span><br><span class="line">export PATH=$NODE_HOME:$PATH</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后按 <strong>ESC</strong> 键 ，在控制台输入<code>:wq</code>，回车保存退出。</li>
+</ul>
+<blockquote>
+<p>注：具体的<strong>NODE_HOME</strong>路径来自第一步你的node安装的目录。</p>
+</blockquote>
+<h3 id="3、安装pm2模块"><a href="#3、安装pm2模块" class="headerlink" title="3、安装pm2模块"></a>3、安装<a href="http://pm2.keymetrics.io" target="_blank" rel="noopener">pm2</a>模块</h3><blockquote>
+<p>pm2 是一个带有负载均衡功能的Node应用的进程管理器.</p>
+</blockquote>
+<ul>
+<li>执行：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g pm2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行成功后，断开当前用户的服务器连接，然后重新登录。</li>
+</ul>
+<h2 id="二、-项目编译"><a href="#二、-项目编译" class="headerlink" title="二、 项目编译"></a>二、 项目编译</h2><h3 id="1、生成项目的根目录"><a href="#1、生成项目的根目录" class="headerlink" title="1、生成项目的根目录"></a>1、生成项目的根目录</h3><p>可以通过命令行或者手动创建的方式生成项目根目录，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir merchant-center</span><br></pre></td></tr></table></figure>
+<p>可以将<code>merchant-center</code>替换成你自己的项目名称。</p>
+<h3 id="2、配置express环境"><a href="#2、配置express环境" class="headerlink" title="2、配置express环境"></a>2、配置express环境</h3><p>将该文档的同级目录下的<code>app.js</code>和<code>package.json</code>两个文件放在你上一步生成的项目根目录下，然后执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>确保当前目录下生成<code>node_modules</code>文件夹。</p>
+<h3 id="3、生成项目的部署文件"><a href="#3、生成项目的部署文件" class="headerlink" title="3、生成项目的部署文件"></a>3、生成项目的部署文件</h3><ul>
+<li>在你的react项目根目录下执行：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<ul>
+<li>成功后，会生成<strong>dist</strong>目录，该目录的内容就是你要部署到服务器上的文件。</li>
+<li>你可以通过：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sup [-r] [-P port] 源路径 user@目标IP地址:目标路径</span><br></pre></td></tr></table></figure>
+<p>或者直接通拽的方式将该目录内容放置服务器上，然后将<code>dist</code>放在第一步生成的项目根目录下。此时，项目的目录结构应该是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">merchant-center        		//或其他项目名称</span><br><span class="line">	|____app.js				//可以打开修改里面的3000端口号</span><br><span class="line">	|____dist     			//项目生成的静态文件（不要重命名！）</span><br><span class="line">	|____node_modules		//express的依赖模块</span><br><span class="line">	|____package.json</span><br></pre></td></tr></table></figure>
+<h2 id="三、项目启动"><a href="#三、项目启动" class="headerlink" title="三、项目启动"></a>三、项目启动</h2><p>首先确保你已经按照本文档执行了以上的所有步骤。然后在项目的根目录下执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js</span><br></pre></td></tr></table></figure>
+<p>当你看到了这样的日志输出的时候，说明你已经启动成功了！</p>
+<p><img src="http://og3zicoi5.bkt.clouddn.com/pm2.png" alt="启动成功"></p>
+<p>另外，pm2的其他命令行参考：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js              # 项目启动</span><br><span class="line">pm2 stop all                  # 停止所有pm2启动的应用</span><br><span class="line">pm2 stop 0                    # 停止进程id为0的进程</span><br><span class="line">pm2 restart all               # 重启所有应用</span><br><span class="line">pm2 reload all                # 0延迟重新加载</span><br><span class="line">pm2 list                      # 列出所有用pm2启动的进程</span><br><span class="line">pm2 monit                     # 显示每一个应用的内存和cpu使用情况</span><br><span class="line">pm2 show [app-name]           # 显示当前应用的所有信息</span><br><span class="line"></span><br><span class="line">pm2 logs                      # 显示所有应用的日志</span><br><span class="line">pm2 logs [app-name]           # 显示当前应用的日志</span><br><span class="line">pm2 logs --json               # 以json格式展示日志</span><br></pre></td></tr></table></figure>
+<p>更多操作命令可以去<a href="http://pm2.keymetrics.io" target="_blank" rel="noopener">pm2官网</a>或者其<a href="https://github.com/Unitech/pm2" target="_blank" rel="noopener">github</a>查看。</p>
+<p>至此，项目已经部署完成啦！</p>
+<p><strong>Open your browser , Enjoy it !</strong></p>
+
+      </div>
+        
+          <section class="meta" id="footer-meta">
+            <hr>
+            <div class="new-meta-box">
+              
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-01T18:08:09+08:00">
+                  <a class="notlink">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    2020-08-01
+                  </a>
+                </div>
+              
+              
+                
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/react/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;react</a></div>
+              
+              
+            </div>
+          </section>
+        
+
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h4>
+                                <a href="/2017年终总结.html" rel="prev" title="2017年终总结">
+                                  
+                                      2017年终总结
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/又是一年/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>又是一年</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/react-native开发过程中踩过的坑.html" rel="prev" title="react-native开发过程中踩过的坑">
+                                    
+                                        react-native开发过程中踩过的坑
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/React-Native/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>React-Native</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      
+      
+        <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+        
+        
+        
+          
+            <section id="comments">
+              <div id="valine_container" class="valine_thread">
+                <i class="fas fa-spinner fa-spin fa-fw"></i>
+              </div>
+            </section>
+          
+        
+      
+    </section>
+  </article>
+
+
+
+<script>
+    window.subData = {
+        title: 'react项目在服务端部署方案',
+        tools: true
+    }
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+  
+  
+    
+      
+      
+        <section class="author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/avatar/avatar.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:me@rocwong.cn" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-envelope" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://github.com/rocwong-cn" class="social flat-btn" target="_blank" rel="external"><i class="social fab fa-github" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=64405940" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-music" aria-hidden="true"></i></a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、环境搭建"><span class="toc-text">一、环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、node-环境安装"><span class="toc-text">1、node 环境安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、配置node环境变量"><span class="toc-text">2、配置node环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、安装pm2模块"><span class="toc-text">3、安装pm2模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、-项目编译"><span class="toc-text">二、 项目编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、生成项目的根目录"><span class="toc-text">1、生成项目的根目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、配置express环境"><span class="toc-text">2、配置express环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、生成项目的部署文件"><span class="toc-text">3、生成项目的部署文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、项目启动"><span class="toc-text">三、项目启动</span></a></li></ol>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/HTML5/" style="font-size: 14px; color: #999">HTML5</a> <a href="/tags/Homebrew/" style="font-size: 14px; color: #999">Homebrew</a> <a href="/tags/JS/" style="font-size: 24px; color: #555">JS</a> <a href="/tags/Jenkins/" style="font-size: 14px; color: #999">Jenkins</a> <a href="/tags/React-Native/" style="font-size: 14px; color: #999">React-Native</a> <a href="/tags/android/" style="font-size: 14px; color: #999">android</a> <a href="/tags/canvas/" style="font-size: 14px; color: #999">canvas</a> <a href="/tags/centos/" style="font-size: 14px; color: #999">centos</a> <a href="/tags/puppeteer/" style="font-size: 14px; color: #999">puppeteer</a> <a href="/tags/react/" style="font-size: 14px; color: #999">react</a> <a href="/tags/vue/" style="font-size: 14px; color: #999">vue</a> <a href="/tags/位移运算/" style="font-size: 14px; color: #999">位移运算</a> <a href="/tags/单例模式/" style="font-size: 14px; color: #999">单例模式</a> <a href="/tags/原型链/" style="font-size: 14px; color: #999">原型链</a> <a href="/tags/又是一年/" style="font-size: 19px; color: #777">又是一年</a> <a href="/tags/好物推荐/" style="font-size: 14px; color: #999">好物推荐</a> <a href="/tags/工厂模式/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/数据结构/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/构建工具/" style="font-size: 14px; color: #999">构建工具</a> <a href="/tags/柯里化/" style="font-size: 14px; color: #999">柯里化</a> <a href="/tags/观察者模式/" style="font-size: 14px; color: #999">观察者模式</a> <a href="/tags/读书笔记/" style="font-size: 19px; color: #777">读书笔记</a> <a href="/tags/进程与线程/" style="font-size: 14px; color: #999">进程与线程</a> <a href="/tags/面试经历/" style="font-size: 14px; color: #999">面试经历</a>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;所有分类</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/fabricjs/" href="/categories/fabricjs/"><div class="name">fabricjs</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/基础原理/" href="/categories/基础原理/"><div class="name">基础原理</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/学习笔记/" href="/categories/学习笔记/"><div class="name">学习笔记</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/年终总结/" href="/categories/年终总结/"><div class="name">年终总结</div><div class="badge">(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/微前端/" href="/categories/微前端/"><div class="name">微前端</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/我爱折腾/" href="/categories/我爱折腾/"><div class="name">我爱折腾</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/服务器操作/" href="/categories/服务器操作/"><div class="name">服务器操作</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/每日一题/" href="/categories/每日一题/"><div class="name">每日一题</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/浏览器/" href="/categories/浏览器/"><div class="name">浏览器</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/移动端开发/" href="/categories/移动端开发/"><div class="name">移动端开发</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/算法相关/" href="/categories/算法相关/"><div class="name">算法相关</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/编码规范/" href="/categories/编码规范/"><div class="name">编码规范</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/装机必备/" href="/categories/装机必备/"><div class="name">装机必备</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/设计模式/" href="/categories/设计模式/"><div class="name">设计模式</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/译文/" href="/categories/译文/"><div class="name">译文</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/进阶心法/" href="/categories/进阶心法/"><div class="name">进阶心法</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/项目部署/" href="/categories/项目部署/"><div class="name">项目部署</div><div class="badge">(3)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+      
+    
+  
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+    </div>
+    <footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:me@rocwong.cn" class="social fas fa-envelope flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://github.com/rocwong-cn" class="social fab fa-github flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://music.163.com/#/user/home?id=64405940" class="social fas fa-music flat-btn" target="_blank" rel="external"></a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>本站使用 <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a> 作为主题，总访问量为 <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+  </div>
+  <div><a href="http://www.beian.miit.gov.cn/" rel="nofollow">京ICP备18022839号-1</a></div>
+</footer>
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        const $reveal = $('.reveal');
+    		if ($reveal.length === 0) return;
+    		const sr = ScrollReveal({ distance: 0 });
+    		sr.reveal('.reveal');
+      });
+    </script>
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        Waves.attach('.flat-btn', ['waves-button']);
+        Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+        Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+        Waves.attach('.flat-box', ['waves-block']);
+        Waves.attach('.float-box', ['waves-block', 'waves-float']);
+        Waves.attach('.waves-image');
+        Waves.init();
+      });
+    </script>
+  
+  
+    <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+  
+  
+  
+
+  
+  
+    
+      
+      
+      
+        
+          <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+          
+            
+              <script src="/js/volantis.js"></script>
+            
+          
+          <script>
+          var GUEST_INFO = ['nick','mail','link'];
+          var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var notify = 'false' == true;
+          var verify = 'false' == true;
+          var valine = new Valine();
+          valine.init({
+            el: '#valine_container',
+            notify: notify,
+            verify: verify,
+            guest_info: guest_info,
+            
+            appId: "gYp5OOFzzylucF3XlyJk6T5a-gzGzoHsz",
+            appKey: "fzh2pJLE0OYsBEt718W40wfB",
+            placeholder: "快来评论吧~",
+            pageSize:'10',
+            avatar:'monsterid',
+            lang:'zh-cn',
+            highlight:''
+          })
+          </script>
+        
+      
+    
+  
+  
+    <script src="/js/app.js"></script>
+<script src="/js/search.js"></script>
+  
+
+
+
+
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
