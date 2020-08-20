@@ -13,11 +13,11 @@
     <lastmod>2020-08-03</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3prototype.html</loc>
+    <loc>http://www.rocwong.cn/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80.html</loc>
+    <loc>http://www.rocwong.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3prototype.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
@@ -37,11 +37,11 @@
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/what-happens-when-type-url-in-broswer.html</loc>
+    <loc>http://www.rocwong.cn/summary2018.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/what-I-installed-in-my-mac.html</loc>
+    <loc>http://www.rocwong.cn/what-happens-when-type-url-in-broswer.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
@@ -49,7 +49,15 @@
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/summary2018.html</loc>
+    <loc>http://www.rocwong.cn/what-I-installed-in-my-mac.html</loc>
+    <lastmod>2020-08-01</lastmod>
+  </url>
+  <url>
+    <loc>http://www.rocwong.cn/react%E9%A1%B9%E7%9B%AE%E5%9C%A8%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88.html</loc>
+    <lastmod>2020-08-01</lastmod>
+  </url>
+  <url>
+    <loc>http://www.rocwong.cn/six-design-principle.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
@@ -58,14 +66,6 @@
   </url>
   <url>
     <loc>http://www.rocwong.cn/summary-of-2019.html</loc>
-    <lastmod>2020-08-01</lastmod>
-  </url>
-  <url>
-    <loc>http://www.rocwong.cn/six-design-principle.html</loc>
-    <lastmod>2020-08-01</lastmod>
-  </url>
-  <url>
-    <loc>http://www.rocwong.cn/react%E9%A1%B9%E7%9B%AE%E5%9C%A8%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
@@ -85,15 +85,11 @@
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/design-pattern.html</loc>
-    <lastmod>2020-08-01</lastmod>
-  </url>
-  <url>
     <loc>http://www.rocwong.cn/fabricjs-setCoords.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/feibonacci.html</loc>
+    <loc>http://www.rocwong.cn/design-pattern.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
@@ -101,11 +97,11 @@
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/design-pattern-factory.html</loc>
+    <loc>http://www.rocwong.cn/feibonacci.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/clean-code-js.html</loc>
+    <loc>http://www.rocwong.cn/design-pattern-factory.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
@@ -117,6 +113,10 @@
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
+    <loc>http://www.rocwong.cn/clean-code-js.html</loc>
+    <lastmod>2020-08-01</lastmod>
+  </url>
+  <url>
     <loc>http://www.rocwong.cn/centos%E4%B8%8B%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%93%8D%E4%BD%9C.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
@@ -125,11 +125,11 @@
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/2017%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93.html</loc>
+    <loc>http://www.rocwong.cn/HTML5%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%B1%87%E6%80%BB.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
-    <loc>http://www.rocwong.cn/HTML5%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%B1%87%E6%80%BB.html</loc>
+    <loc>http://www.rocwong.cn/2017%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93.html</loc>
     <lastmod>2020-08-01</lastmod>
   </url>
   <url>
