@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>让你的 Web 应用和移动应用选择 PWA 的 5 个理由 | RocWong&#39;s Blog</title>
+  
+  <meta name="keywords" content="PWA, 前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+  <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar" class="pure"></div>
+</div>
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header pure">
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          RocWong's Blog
+        
+      </a>
+			<div class="menu">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a id="home" class="nav flat-box" href="/">
+									<i class="fas fa-home fa-fw"></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="archives" class="nav flat-box" href="/archives/">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="books" class="nav flat-box" href="/books/">
+									<i class="fas fa-book fa-fw"></i>&nbsp;书单
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="mind" class="nav flat-box" href="/mind/">
+									<i class="fas fa-bolt fa-fw"></i>&nbsp;思维
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="project" class="nav flat-box" href="/project/">
+									<i class="fas fa-gavel fa-fw"></i>&nbsp;项目
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="friends" class="nav flat-box" href="/friends/">
+									<i class="fas fa-link fa-fw"></i>&nbsp;友链
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="about" class="nav flat-box" href="/about/">
+									<i class="fas fa-user fa-fw"></i>&nbsp;关于
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<span class="icon"><i class="fas fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+				<li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu">
+      <ul>
+          
+              
+                  <li>
+										<a id="home" class="nav flat-box" href="/">
+											<i class="fas fa-home fa-fw"></i>&nbsp;主页
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="archives" class="nav flat-box" href="/archives/">
+											<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="books" class="nav flat-box" href="/books/">
+											<i class="fas fa-book fa-fw"></i>&nbsp;书单
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="mind" class="nav flat-box" href="/mind/">
+											<i class="fas fa-bolt fa-fw"></i>&nbsp;思维
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="project" class="nav flat-box" href="/project/">
+											<i class="fas fa-gavel fa-fw"></i>&nbsp;项目
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="friends" class="nav flat-box" href="/friends/">
+											<i class="fas fa-link fa-fw"></i>&nbsp;友链
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="about" class="nav flat-box" href="/about/">
+											<i class="fas fa-user fa-fw"></i>&nbsp;关于
+										</a>
+                  </li>
+              
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+  
+<section class="meta">
+  
+  
+  <div class="meta" id="header-meta">
+    
+      
+          <h1 class="title">让你的 Web 应用和移动应用选择 PWA 的 5 个理由</h1>
+      
+    
+
+    <div class="new-meta-box">
+      
+        <div class="new-meta-item author">
+          <a href="http://www.rocwong.cn">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            RocWong
+          </a>
+        </div>
+      
+      
+        <div class="new-meta-item date">
+          <a class="notlink">
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+            2020-09-01
+          </a>
+        </div>
+      
+      
+        
+          
+          <div class="new-meta-item category">
+            <a href="/categories/译文/">
+              <i class="fas fa-folder-open" aria-hidden="true"></i>
+              译文
+            </a>
+          </div>
+        
+      
+      
+        
+          <div class="new-meta-item browse busuanzi">
+            <a class="notlink">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+              <span id="busuanzi_value_page_pv">
+                <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        
+      
+      
+    </div>
+    <hr>
+  </div>
+</section>
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p><img src="https://cdn-images-1.medium.com/max/12000/1*tNa6Nnn7Ffq8uDEomL_pWw.jpeg" alt="Photo by **[Lisa Fotios](https://www.pexels.com/@fotios-photos) on [Pixels](https://www.pexels.com/)**"></p>
+ <a id="more"></a>
+<p>我敢肯定你们中大多数的人都听说过渐进式网页应用（PWA）。PWA 是一项令人兴奋的技术，它具有颠覆我们开发 Web 和移动应用的方式的潜力。然而，有些人可能会说 PWA 只是将网站转换为移动应用，还有些人则在争论其功能、安全性以及相较于原生移动应用的性能。</p>
+<p>因此，在本文中，我将解释 PWA 的五个有价值的特性，这些特性对于您将来的 Web 和移动应用会非常有用。</p>
+<h2 id="1-Web-和移动平台的单一技术"><a href="#1-Web-和移动平台的单一技术" class="headerlink" title="1. Web 和移动平台的单一技术"></a>1. Web 和移动平台的单一技术</h2><p>在现代技术世界中，我们可以看到很多开发人员已将自己打造成 Web 开发人员，移动端开发人员等。</p>
+<p>究其原因，我们可以发现技术、工具和不同的平台在分工中发挥了重要的作用。</p>
+<p>如果以原生 App 的开发为例，则需要了解一些特定的技术，例如 Java、Kotlin、Swift、Flutter 等编程语言，以及 Android Studio、XCode 等工具包。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*ugxSh7SYNtRB_CmJD_gn_A.png" alt="Screenshot by Auther (Source — [StackOverflow](https://insights.stackoverflow.com/survey/2019#technology))"></p>
+<p>相反，使用 JavaScript / TypeScript、HTML、CSS 以及 Angular 这样的框架或 React 这样的库是很容易的。如果我们查看 <a href="https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-wanted" target="_blank" rel="noopener">2019 年 stack overflow 的调查结果</a>，我们会发现这些 Web 开发语言是最受欢迎的。</p>
+<p>这些结果着影响开发人员的技术选型，因此，将更能容易找到 Web 领域的开发人员。</p>
+<h2 id="2-性能可靠"><a href="#2-性能可靠" class="headerlink" title="2. 性能可靠"></a>2. 性能可靠</h2><p>快速、可靠和沉浸式体验是我们可以在 PWA 中看到的一些重要特性。Application Shell 架构是实现这些特性的最佳方法之一。即使用户处于弱网或离线状态，该架构体系也可以为用户提供快速、可靠的性能。让我们看看该架构的主要优势是什么。</p>
+<p><img src="https://cdn-images-1.medium.com/max/4000/0*Fi5V2irPUGri9v-D" alt="Shell vs. Content Structure"></p>
+<p>如果我们遵循 Application Shell 架构原则，可以将应用分为 <strong>Shell</strong> 和 <strong>Content</strong> 两个主要部分。 初始化用户界面所需的最小应用程序内容称为 Shell，而其他需要通过联网获取的动态部分被封为 Content。 因此，Shell 负责通过缓存其内容以供离线环境使用，从而为用户提供快速、可靠的用户体验。这种方法非常适合单页面应用（SPA），并且为用户提供了合理的数据使用，可靠和快速的性能以及原生的交互体验。</p>
+<h2 id="3-使用-Service-Worker-提供最佳的用户体验"><a href="#3-使用-Service-Worker-提供最佳的用户体验" class="headerlink" title="3. 使用 Service Worker 提供最佳的用户体验"></a>3. 使用 Service Worker 提供最佳的用户体验</h2><p>如果您是 Web 开发人员，那么我相信您一定已经使用或听说过 Service Worker。Service Worker 在您的 Web 应用程序的后台运行，并处理大量不需要用户关注的任务。这些 Service Worker 通常在新的 Web 应用程序中使用，也可以在 PWA 中使用。让我们看一下 Service Worker 为 PWA 提供的主要功能。</p>
+<h4 id="离线运行"><a href="#离线运行" class="headerlink" title="离线运行"></a>离线运行</h4><p>与原生应用相比，离线运行是 PWA 的更具竞争性特征之一，PWA 由于 Service Worker 而获得了此功能。使用Service Worker，您可以缓存应用的 Shell，当用户再次访问时它将立即加载。这些后台操作可改善应用的用户体验，因为用户不会看到在线和离线模式之间的任何重大差异。但是只有在联网后，动态内容才会刷新。我们可以使用 telegram（一个消息传递平台）来举例，该应用程序将照常打开，即使您处于离线状态，您也可以查看和阅读以前的聊天记录。联机后，应用程序将刷新并显示新消息。</p>
+<h4 id="后台同步"><a href="#后台同步" class="headerlink" title="后台同步"></a>后台同步</h4><p>后台同步是 Service Worker 提供的另一项功能，它使应用程序可以在网络连接可用时响应任何关键请求，即使您是在离线模式发起的调用。例如，如果您在断网时发送消息，Service Worker 将负责处理并在连接可用时完成该请求。后台同步的 Demo 实现如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">navigator.serviceWorker.register(<span class="string">'/service_worker.js'</span>);</span><br><span class="line"></span><br><span class="line">navigator.serviceWorker.ready.then(<span class="function"><span class="keyword">function</span>(<span class="params">swRegistration</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> swRegistration.sync.register(<span class="string">'backGroundSync'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">self.addEventListener(<span class="string">'sync'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (event.tag == <span class="string">'backGroundSync'</span>) &#123;</span><br><span class="line">    event.waitUntil(yourFunction());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如上所述，即使关闭了应用程序，Service Worker 仍被用作事件目标，以使后台同步工作。 <code>yourFunction()</code> 将返回一个 <code>Promise</code>，该 <code>Promise</code> 将标记活动的状态为成功或者失败。如果成功，则完成后台同步；如果失败，则稍后再安排一次同步。另外，请注意 <code>yourFunction()</code> 的名称对于给定的同步应该是唯一的。</p>
+<p>除了这两项之外，Service Worker 还为 PWA 提供了许多功能，例如即使应用程序不活跃时也可以接收推送通知、缓存网络请求以及缓存静态内容等。</p>
+<h2 id="4-原生应用的外观和体验"><a href="#4-原生应用的外观和体验" class="headerlink" title="4. 原生应用的外观和体验"></a>4. 原生应用的外观和体验</h2><p>简单地讲，Web 应用的清单文件（manifest）就是负责 PWA 具备原生外观的 JSON 文件。当我们从 play store 或者 app store 安装一个应用时，就可以在手机上看到一个应用的图标，这就使得移动应用相较于网站更具交互性。对于 PWA，Web 应用的清单文件是所有用户交互的入口点，并且包含应用的外观相关配置的元数据。使用此 JSON 文件，我们可以轻松地更改应用的许多元素，包括应用的图标、主题色、方向和启动屏页面。下面我们一个实例来更深入的讨论一下这些属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;My Example App&quot;,</span><br><span class="line">  &quot;short_name&quot;: &quot;My App&quot;,</span><br><span class="line">  &quot;start_url&quot;: &quot;.&quot;,</span><br><span class="line">  &quot;display&quot;: &quot;standalone&quot;  </span><br><span class="line">  &quot;background_color&quot;: &quot;#ffffff&quot;,</span><br><span class="line">  &quot;theme_color&quot;: &quot;red&quot;</span><br><span class="line">  &quot;description&quot;: &quot;Demo App.&quot;,</span><br><span class="line">  &quot;orientation&quot;: &quot;portrait-primary&quot;,</span><br><span class="line">  &quot;icons&quot;: [&#123;</span><br><span class="line">    &quot;src&quot;: &quot;images/logo.png&quot;,</span><br><span class="line">    &quot;sizes&quot;: &quot;48x48&quot;,</span><br><span class="line">    &quot;type&quot;: &quot;image/png&quot;</span><br><span class="line">  &#125; ... ],</span><br><span class="line">  &quot;related_applications&quot;: [&#123;</span><br><span class="line">    &quot;platform&quot;: &quot;play&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;https://play.google.com/store/apps/details?...&quot;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个简单的 Web 清单 JSON 文件如上所示，<strong>name，short_name</strong> 属性用于应用程序的名称显示。 在这里，<strong>icon</strong> 属性包含不同尺寸的应用图标列表。 <strong>display</strong> 属性可以具有全屏、独立、最小用户界面和浏览器这些值，全屏模式会删除所有浏览器元素，并为您的应用程序提供最佳的原生体验。 <strong>start_url</strong> 定义了用户从主屏幕启动 PWA 时加载的页面。除此之外，还有许多属性可用于为 PWA 带来原生的体验。最重要的是，作为开发人员，您可以完全控制应用程序的启动过程，并且可以使用这些属性轻松地与原生应用一较高下。</p>
+<h2 id="5-增强安全性以及设备访问的透明性"><a href="#5-增强安全性以及设备访问的透明性" class="headerlink" title="5. 增强安全性以及设备访问的透明性"></a>5. 增强安全性以及设备访问的透明性</h2><p>安全是我们需要考虑的另一个重要方面。随着全球安全事件的增加，用户比以往任何时候都更加关注其数据设备的安全性，防止受到恶意攻击。因此，作为开发人员，我们必须使用我们选择的技术来建立安全性的最佳实践以避免这些问题。因此，让我们看看如何通过 PWA 确保对用户的安全性。</p>
+<p>PWA 强制执行传输层安全性。因此，用户在传输过程中将对敏感信息进行加密，并且只能使用存储在服务器中的私钥来解密数据。出于这个原因，应该使用 HTTPS 为 PWA 的网站提供服务，并且必须在服务器中安装 SSL 证书。</p>
+<p>另外，未经用户许可，PWA 不会与设备硬件进行交互，并且在 PWA 应用程序中隐藏任何恶意代码也不容易。如果我们遵循最佳实践，仅请求对设备的必要访问权限，并使用最新的受信任 JavaScript 库，则风险将大大降低。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>除了这 5 个原因以外， PWA 还包含我们期望从任意 Web 或者移动应用中获取的质量，例如响应速度、可靠性以及用户体验等。作为开发人员，开发 PWA 很容易，因为您无需具有语言和框架的负担。与原生应用的开发相比，PWA 花费的时间更少。</p>
+<p>如果您决定使用 PWA，在业务层面，成本会更低，市场占有率会更高，并且可以在搜索引擎中非常快速地对其进行优化。因此，下次寻求 Web 或者移动端的解决方案时，请马上尝试 PWA 吧。</p>
+<blockquote>
+<ul>
+<li>原文地址：<a href="https://blog.bitsrc.io/5-reasons-to-choose-pwa-for-your-web-and-mobile-apps-515c6d0e784d" target="_blank" rel="noopener">5 Reasons to Choose PWA for Your Web and Mobile Apps</a></li>
+<li>原文作者：<a href="https://medium.com/@chameeradulanga87" target="_blank" rel="noopener">Chameera Dulanga</a></li>
+</ul>
+</blockquote>
+
+      </div>
+        
+          <section class="meta" id="footer-meta">
+            <hr>
+            <div class="new-meta-box">
+              
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-01T19:44:57+08:00">
+                  <a class="notlink">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    2020-09-01
+                  </a>
+                </div>
+              
+              
+                
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/PWA/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;PWA</a></div>
+              
+              
+            </div>
+          </section>
+        
+
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/chrome-shape-detect-api.html" rel="prev" title="使用 Chrome 的 Shape Detection API 检测人脸，文本甚至条形码">
+                                    
+                                        使用 Chrome 的 Shape Detection API 检测人脸，文本甚至条形码
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/AI/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>AI</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      
+      
+        <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+        
+        
+        
+          
+            <section id="comments">
+              <div id="valine_container" class="valine_thread">
+                <i class="fas fa-spinner fa-spin fa-fw"></i>
+              </div>
+            </section>
+          
+        
+      
+    </section>
+  </article>
+
+
+
+<script>
+    window.subData = {
+        title: '让你的 Web 应用和移动应用选择 PWA 的 5 个理由',
+        tools: true
+    }
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+  
+  
+    
+      
+      
+        <section class="author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/avatar/avatar.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:me@rocwong.cn" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-envelope" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://github.com/rocwong-cn" class="social flat-btn" target="_blank" rel="external"><i class="social fab fa-github" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=64405940" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-music" aria-hidden="true"></i></a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Web-和移动平台的单一技术"><span class="toc-text">1. Web 和移动平台的单一技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-性能可靠"><span class="toc-text">2. 性能可靠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-使用-Service-Worker-提供最佳的用户体验"><span class="toc-text">3. 使用 Service Worker 提供最佳的用户体验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#离线运行"><span class="toc-text">离线运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#后台同步"><span class="toc-text">后台同步</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#4-原生应用的外观和体验"><span class="toc-text">4. 原生应用的外观和体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-增强安全性以及设备访问的透明性"><span class="toc-text">5. 增强安全性以及设备访问的透明性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-text">结论</span></a></li>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/AI/" style="font-size: 14px; color: #999">AI</a> <a href="/tags/HTML5/" style="font-size: 14px; color: #999">HTML5</a> <a href="/tags/Homebrew/" style="font-size: 14px; color: #999">Homebrew</a> <a href="/tags/JS/" style="font-size: 24px; color: #555">JS</a> <a href="/tags/Jenkins/" style="font-size: 14px; color: #999">Jenkins</a> <a href="/tags/PWA/" style="font-size: 14px; color: #999">PWA</a> <a href="/tags/React-Native/" style="font-size: 14px; color: #999">React-Native</a> <a href="/tags/android/" style="font-size: 14px; color: #999">android</a> <a href="/tags/canvas/" style="font-size: 14px; color: #999">canvas</a> <a href="/tags/centos/" style="font-size: 14px; color: #999">centos</a> <a href="/tags/puppeteer/" style="font-size: 14px; color: #999">puppeteer</a> <a href="/tags/react/" style="font-size: 14px; color: #999">react</a> <a href="/tags/typescript/" style="font-size: 14px; color: #999">typescript</a> <a href="/tags/vue/" style="font-size: 14px; color: #999">vue</a> <a href="/tags/位移运算/" style="font-size: 14px; color: #999">位移运算</a> <a href="/tags/单例模式/" style="font-size: 14px; color: #999">单例模式</a> <a href="/tags/原型链/" style="font-size: 14px; color: #999">原型链</a> <a href="/tags/又是一年/" style="font-size: 19px; color: #777">又是一年</a> <a href="/tags/好物推荐/" style="font-size: 14px; color: #999">好物推荐</a> <a href="/tags/工厂模式/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/数据结构/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/构建工具/" style="font-size: 14px; color: #999">构建工具</a> <a href="/tags/柯里化/" style="font-size: 14px; color: #999">柯里化</a> <a href="/tags/观察者模式/" style="font-size: 14px; color: #999">观察者模式</a> <a href="/tags/读书笔记/" style="font-size: 19px; color: #777">读书笔记</a> <a href="/tags/进程与线程/" style="font-size: 14px; color: #999">进程与线程</a> <a href="/tags/面试经历/" style="font-size: 14px; color: #999">面试经历</a>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;所有分类</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/fabricjs/" href="/categories/fabricjs/"><div class="name">fabricjs</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/基础原理/" href="/categories/基础原理/"><div class="name">基础原理</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/学习笔记/" href="/categories/学习笔记/"><div class="name">学习笔记</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/年终总结/" href="/categories/年终总结/"><div class="name">年终总结</div><div class="badge">(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/微前端/" href="/categories/微前端/"><div class="name">微前端</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/我爱折腾/" href="/categories/我爱折腾/"><div class="name">我爱折腾</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/服务器操作/" href="/categories/服务器操作/"><div class="name">服务器操作</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/每日一题/" href="/categories/每日一题/"><div class="name">每日一题</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/浏览器/" href="/categories/浏览器/"><div class="name">浏览器</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/移动端开发/" href="/categories/移动端开发/"><div class="name">移动端开发</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/算法相关/" href="/categories/算法相关/"><div class="name">算法相关</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/编码规范/" href="/categories/编码规范/"><div class="name">编码规范</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/装机必备/" href="/categories/装机必备/"><div class="name">装机必备</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/设计模式/" href="/categories/设计模式/"><div class="name">设计模式</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/译文/" href="/categories/译文/"><div class="name">译文</div><div class="badge">(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/进阶心法/" href="/categories/进阶心法/"><div class="name">进阶心法</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/项目部署/" href="/categories/项目部署/"><div class="name">项目部署</div><div class="badge">(3)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+      
+    
+  
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+    </div>
+    <footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:me@rocwong.cn" class="social fas fa-envelope flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://github.com/rocwong-cn" class="social fab fa-github flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://music.163.com/#/user/home?id=64405940" class="social fas fa-music flat-btn" target="_blank" rel="external"></a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>本站使用 <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a> 作为主题，总访问量为 <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+  </div>
+  <div><a href="http://www.beian.miit.gov.cn/" rel="nofollow">京ICP备18022839号-1</a></div>
+</footer>
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        const $reveal = $('.reveal');
+    		if ($reveal.length === 0) return;
+    		const sr = ScrollReveal({ distance: 0 });
+    		sr.reveal('.reveal');
+      });
+    </script>
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        Waves.attach('.flat-btn', ['waves-button']);
+        Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+        Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+        Waves.attach('.flat-box', ['waves-block']);
+        Waves.attach('.float-box', ['waves-block', 'waves-float']);
+        Waves.attach('.waves-image');
+        Waves.init();
+      });
+    </script>
+  
+  
+    <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+  
+  
+  
+
+  
+  
+    
+      
+      
+      
+        
+          <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+          
+            
+              <script src="/js/volantis.js"></script>
+            
+          
+          <script>
+          var GUEST_INFO = ['nick','mail','link'];
+          var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var notify = 'false' == true;
+          var verify = 'false' == true;
+          var valine = new Valine();
+          valine.init({
+            el: '#valine_container',
+            notify: notify,
+            verify: verify,
+            guest_info: guest_info,
+            
+            appId: "gYp5OOFzzylucF3XlyJk6T5a-gzGzoHsz",
+            appKey: "fzh2pJLE0OYsBEt718W40wfB",
+            placeholder: "快来评论吧~",
+            pageSize:'10',
+            avatar:'monsterid',
+            lang:'zh-cn',
+            highlight:''
+          })
+          </script>
+        
+      
+    
+  
+  
+    <script src="/js/app.js"></script>
+<script src="/js/search.js"></script>
+  
+
+
+
+
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
