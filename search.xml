@@ -13,14 +13,14 @@
       
       <categories>
           
-          <category> xxx </category>
+          <category> 我爱折腾 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> xxx </tag>
+            <tag> 好物推荐 </tag>
             
         </tags>
       
@@ -904,31 +904,6 @@
     
     
     <entry>
-      <title>android打渠道包</title>
-      <link href="/android%E6%89%93%E6%B8%A0%E9%81%93%E5%8C%85.html"/>
-      <url>/android%E6%89%93%E6%B8%A0%E9%81%93%E5%8C%85.html</url>
-      
-        <content type="html"><![CDATA[<p>首先需要在android/app/build.gradle裡面添加一下命令：</p><a id="more"></a><blockquote><p>productFlavors {多渠道打包<br>            android {}安卓市场<br>            c360 {}360市场<br>            xiaomi {}小米市场<br>            yingyongbao {}应用宝<br>            flyme {}魅族flyme市场<br>            wandoujia {}豌豆荚<br>            anzhi {}安智市场<br>            lenovo {}联想<br>            huawei {}华为<br>            yingyonghui {}应用汇<br>            jifeng {}机锋市场<br>            sougou {}搜狗市场<br>            oppo {}oppo市场<br>            uc {}UC商店/PP助手/淘宝助手<br>            pp {}PP助手<br>            mumayi {}木蚂蚁<br>            vivo {}vivo<br>            jinli {}金立<br>            souhu {}搜狐<br>            baidu {}百度市场<br>            productFlavors.all { flavor -&gt;<br>                flavor.manifestPlaceholders = [APP_CHANNEL: name]<br>            }<br>        }</p><footer><strong>app/build.gradle</strong></footer></blockquote><p>   如果用到了友盟等統計插件的話，然後删除manifestPlaceholders里面的APP_CHANNEL,AndroidManifest.xml里面添加：<br>     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data android:value=&quot;$&#123;APP_CHANNEL&#125;&quot;  android:name=&quot;UMENG_CHANNEL&quot;/&gt;</span><br><span class="line">     </span><br></pre></td></tr></table></figure></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 移动端开发 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> android </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>2016年终总结</title>
       <link href="/2016%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93.html"/>
       <url>/2016%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93.html</url>
@@ -946,6 +921,31 @@
         <tags>
             
             <tag> 又是一年 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>android打渠道包</title>
+      <link href="/android%E6%89%93%E6%B8%A0%E9%81%93%E5%8C%85.html"/>
+      <url>/android%E6%89%93%E6%B8%A0%E9%81%93%E5%8C%85.html</url>
+      
+        <content type="html"><![CDATA[<p>首先需要在android/app/build.gradle裡面添加一下命令：</p><a id="more"></a><blockquote><p>productFlavors {多渠道打包<br>            android {}安卓市场<br>            c360 {}360市场<br>            xiaomi {}小米市场<br>            yingyongbao {}应用宝<br>            flyme {}魅族flyme市场<br>            wandoujia {}豌豆荚<br>            anzhi {}安智市场<br>            lenovo {}联想<br>            huawei {}华为<br>            yingyonghui {}应用汇<br>            jifeng {}机锋市场<br>            sougou {}搜狗市场<br>            oppo {}oppo市场<br>            uc {}UC商店/PP助手/淘宝助手<br>            pp {}PP助手<br>            mumayi {}木蚂蚁<br>            vivo {}vivo<br>            jinli {}金立<br>            souhu {}搜狐<br>            baidu {}百度市场<br>            productFlavors.all { flavor -&gt;<br>                flavor.manifestPlaceholders = [APP_CHANNEL: name]<br>            }<br>        }</p><footer><strong>app/build.gradle</strong></footer></blockquote><p>   如果用到了友盟等統計插件的話，然後删除manifestPlaceholders里面的APP_CHANNEL,AndroidManifest.xml里面添加：<br>     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data android:value=&quot;$&#123;APP_CHANNEL&#125;&quot;  android:name=&quot;UMENG_CHANNEL&quot;/&gt;</span><br><span class="line">     </span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 移动端开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> android </tag>
             
         </tags>
       
