@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>【PMP之路】二、项目生命周期与组织 | RocWong&#39;s Blog</title>
+  
+  <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+  <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar" class="pure"></div>
+</div>
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header pure">
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          RocWong's Blog
+        
+      </a>
+			<div class="menu">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a id="home" class="nav flat-box" href="/">
+									<i class="fas fa-home fa-fw"></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="archives" class="nav flat-box" href="/archives/">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="books" class="nav flat-box" href="/books/">
+									<i class="fas fa-book fa-fw"></i>&nbsp;书单
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="mind" class="nav flat-box" href="/mind/">
+									<i class="fas fa-bolt fa-fw"></i>&nbsp;思维
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="project" class="nav flat-box" href="/project/">
+									<i class="fas fa-gavel fa-fw"></i>&nbsp;项目
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="friends" class="nav flat-box" href="/friends/">
+									<i class="fas fa-link fa-fw"></i>&nbsp;友链
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="about" class="nav flat-box" href="/about/">
+									<i class="fas fa-user fa-fw"></i>&nbsp;关于
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<span class="icon"><i class="fas fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+				<li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu">
+      <ul>
+          
+              
+                  <li>
+										<a id="home" class="nav flat-box" href="/">
+											<i class="fas fa-home fa-fw"></i>&nbsp;主页
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="archives" class="nav flat-box" href="/archives/">
+											<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="books" class="nav flat-box" href="/books/">
+											<i class="fas fa-book fa-fw"></i>&nbsp;书单
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="mind" class="nav flat-box" href="/mind/">
+											<i class="fas fa-bolt fa-fw"></i>&nbsp;思维
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="project" class="nav flat-box" href="/project/">
+											<i class="fas fa-gavel fa-fw"></i>&nbsp;项目
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="friends" class="nav flat-box" href="/friends/">
+											<i class="fas fa-link fa-fw"></i>&nbsp;友链
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="about" class="nav flat-box" href="/about/">
+											<i class="fas fa-user fa-fw"></i>&nbsp;关于
+										</a>
+                  </li>
+              
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+  
+<section class="meta">
+  
+  
+  <div class="meta" id="header-meta">
+    
+      
+          <h1 class="title">【PMP之路】二、项目生命周期与组织</h1>
+      
+    
+
+    <div class="new-meta-box">
+      
+        <div class="new-meta-item author">
+          <a href="http://www.rocwong.cn">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            RocWong
+          </a>
+        </div>
+      
+      
+        <div class="new-meta-item date">
+          <a class="notlink">
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+            2020-12-04
+          </a>
+        </div>
+      
+      
+        
+          
+          <div class="new-meta-item category">
+            <a href="/categories/PMP之路/">
+              <i class="fas fa-folder-open" aria-hidden="true"></i>
+              PMP之路
+            </a>
+          </div>
+        
+      
+      
+        
+          <div class="new-meta-item browse busuanzi">
+            <a class="notlink">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+              <span id="busuanzi_value_page_pv">
+                <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        
+      
+      
+    </div>
+    <hr>
+  </div>
+</section>
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>项目生命周期是指从项目开始到结束的全过程。项目组织的目的性很强，项目组织存在于生命周期中，组织在执行项目的过程中通常会将项目分为不同的阶段来更好的管理项目。</p>
+ <a id="more"></a>
+<h2 id="2-1-项目生命周期"><a href="#2-1-项目生命周期" class="headerlink" title="2.1 项目生命周期"></a>2.1 项目生命周期</h2><h3 id="2-1-1-生命周期模型"><a href="#2-1-1-生命周期模型" class="headerlink" title="2.1.1 生命周期模型"></a>2.1.1 生命周期模型</h3><ul>
+<li>瀑布模型（预测性生命周期）</li>
+<li>敏捷模型（适应性生命周期）</li>
+<li>迭代模型</li>
+<li>增量模型</li>
+<li>混合模型</li>
+</ul>
+<h3 id="2-1-2-项目生命周期的共同特点"><a href="#2-1-2-项目生命周期的共同特点" class="headerlink" title="2.1.2 项目生命周期的共同特点"></a>2.1.2 项目生命周期的共同特点</h3><ul>
+<li>生命周期都可以分为4个通用阶段：启动项目、组织与准备、执行项目工作、结束项目</li>
+<li>项目阶段按照顺序首尾衔接</li>
+<li>项目对费用和人员的需求随着项目发展逐渐递增，达到一个最高点后，又会递减。</li>
+<li>成功完成项目的把握性随着项目发展越来越高</li>
+<li>项目相关方对项目产品的最后特点和最终成本的影响力是最大的，随着项目发展，递减。造成这种现象的主要原因是随着项目的推进，变更的难度和代价会越来越大。</li>
+</ul>
+<h2 id="2-2-事业环境因素与组织过程资产"><a href="#2-2-事业环境因素与组织过程资产" class="headerlink" title="2.2 事业环境因素与组织过程资产"></a>2.2 事业环境因素与组织过程资产</h2><h3 id="2-2-1-事业环境因素"><a href="#2-2-1-事业环境因素" class="headerlink" title="2.2.1 事业环境因素"></a>2.2.1 事业环境因素</h3><p>事业环境因素是指项目团队<strong>不能控制</strong>的，将对项目产生影响、限制或指令作用的各种条件。可能来自组织内部或者外部。事业环境因素是大多数规划过程的输入。</p>
+<p><strong>1. 组织内部的事业环境因素</strong></p>
+<ul>
+<li>组织文化、结构和治理</li>
+<li>设施和资源的地理分布</li>
+<li>基础设施</li>
+<li>信息技术软件</li>
+<li>资源可用性</li>
+<li>员工能力</li>
+</ul>
+<p><strong>2.组织外部的事业环境因素</strong></p>
+<ul>
+<li>市场条件</li>
+<li>社会和文化影响与问题</li>
+<li>法律限制</li>
+<li>商业数据库</li>
+<li>学术研究</li>
+<li>政府或行业标准</li>
+<li>财务考虑因素</li>
+<li>物理环境要素</li>
+</ul>
+<h3 id="2-2-2-组织过程资产"><a href="#2-2-2-组织过程资产" class="headerlink" title="2.2.2 组织过程资产"></a>2.2.2 组织过程资产</h3><p>组织过程资产是执行组织所特有并使用的计划、过程、政策、程序和知识库，会影响对具体项目的管理。它包括过往项目的经验教训和历史信息、进度计划、风险数据和挣值数据。</p>
+<h2 id="2-3-组织对项目管理的影响"><a href="#2-3-组织对项目管理的影响" class="headerlink" title="2.3 组织对项目管理的影响"></a>2.3 组织对项目管理的影响</h2><h3 id="2-3-1-组织系统"><a href="#2-3-1-组织系统" class="headerlink" title="2.3.1 组织系统"></a>2.3.1 组织系统</h3><p>系统是各种组件的集合，可以实现单个组件无法实现的功能。系统基本原则包括：系统是动态的、系统是可以优化的、系统组件是可以优化的、系统及其组件不能同事被优化，以及系统呈现非线性响应。</p>
+<p>系统因素包括但不限于管理要素、治理框架和组织结构类型。</p>
+<p>组织结构类型：</p>
+<ul>
+<li>有机型（简约型）</li>
+<li>多部门性</li>
+<li>项目导向型</li>
+<li>虚拟型</li>
+<li>混合型</li>
+</ul>
+<h3 id="2-3-2-职能型组织"><a href="#2-3-2-职能型组织" class="headerlink" title="2.3.2 职能型组织"></a>2.3.2 职能型组织</h3><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/zhinengxing.jpeg" alt></p>
+<blockquote>
+<p>图中的部门经理同职能经理。</p>
+</blockquote>
+<p>职能型组织是指组织按职能和职能的相似性来划分部门。</p>
+<p>当项目在职能型组织中实施时，项目协调员被赋予沟通与协调的职责，有一定的指派工作和分配资源的权利，也有一定的决策权。项目协调员向比职能经理更高职位的人汇报，项目团队成员仍旧向他们的上司（职能经理）汇报。</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>有利于组织技术水平的提升。</li>
+<li>资源利用的灵活性与低成本</li>
+<li>有利于从整体协调组织的活动</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>协调难度大</li>
+<li>没有明确的责任人，项目团队成员责任淡化。</li>
+<li>客户可能找不到专门的联络点。</li>
+</ul>
+<p>表：职能型组织的有点与缺点</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">便于对专家进行管理</td>
+<td style="text-align:center">职能工作容易优先于项目工作</td>
+</tr>
+<tr>
+<td style="text-align:center">团队中成员只有一个上级</td>
+<td style="text-align:center">与其他职能部门之间没有沟通</td>
+</tr>
+<tr>
+<td style="text-align:center">职能部门可以为员工提供一个职业发展的良好平台，员工的职业路径清楚</td>
+<td style="text-align:center">没有全职的项目经理，项目经理没有权力</td>
+</tr>
+<tr>
+<td style="text-align:center">同专业者在一起，有利于专业技术的提高</td>
+<td style="text-align:center">忽视其他职能部门在项目上的利益</td>
+</tr>
+<tr>
+<td style="text-align:center">项目团队成员可以同时从事项目工作和日常工作，具有在两者之间协调上的灵活性</td>
+<td style="text-align:center">没有项目管理的职业发展前景</td>
+</tr>
+<tr>
+<td style="text-align:center">同一职能部门内的协调和沟通比较容易</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">同一职能部门可以对自己专业范围内的问题作出迅速、有效的反应</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-3-3-项目型组织"><a href="#2-3-3-项目型组织" class="headerlink" title="2.3.3 项目型组织"></a>2.3.3 项目型组织</h3><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/xiangmuxing.jpeg" alt></p>
+<p>项目型组织形式按项目来划归所有资源，即每个项目有完成项目任务所必须的所有资源。每个项目执行组织有明确的项目经理，也就是每个项目的负责人，对上直接接受组织主管或大项目经理的领导，对下负责本项目资源的运用以完成项目任务。每个项目组之间相对独立。</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>目标明确，统一指挥。</li>
+<li>有利于项目控制，有利于快速决策。</li>
+<li>有利于全面型人才的成长。</li>
+<li>项目团队成员容易被激励，对项目忠诚，有责任心。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>机构重复，资源限制。</li>
+<li>不利于组织专业技术水平的提高。</li>
+<li>不稳定性。</li>
+</ul>
+<p>归结起来就是：</p>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目组织简单、有效</td>
+<td>项目结束后，成员无”家“可归</td>
+</tr>
+<tr>
+<td>项目经理的权力充分，有利于统一指挥</td>
+<td>不利于成员的专业技术发展</td>
+</tr>
+<tr>
+<td>项目成员忠诚于项目</td>
+<td>重复配置设备和人员</td>
+</tr>
+<tr>
+<td>沟通更有效</td>
+<td>资源利用率低</td>
+</tr>
+<tr>
+<td>决策速度快</td>
+<td>职能部门对项目无动于衷</td>
+</tr>
+<tr>
+<td>便于项目团队建设</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-3-4-矩阵型组织"><a href="#2-3-4-矩阵型组织" class="headerlink" title="2.3.4 矩阵型组织"></a>2.3.4 矩阵型组织</h3><p>矩阵型组织的特点是按照职能划分的纵向部门与按照项目划分的横向部门结合起来，已构成类似矩阵的管理系统。</p>
+<p>根据项目经理权力的大小，矩阵型组织可以分为弱矩阵、强矩阵和平衡矩阵三种类型。</p>
+<p><strong>1. 弱矩阵型组织</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/ruojuzhen.jpeg" style="zoom:30%;"></p>
+<p>弱矩阵型组织保留了职能型组织的大部分特征，其项目经理的角色更像是协调员或者联络员，而非真正的项目经理，如上图。</p>
+<p>项目联络员没有指派工作和分配资源的权力，也就没有决策权，只起到沟通和协调的作用，其层次一般比较低，介于项目团队成员与职能经理之间。</p>
+<p><strong>2. 强矩阵型组织</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/qiangjuzhen.jpeg" style="zoom:33%;"></p>
+<p>在强矩阵型组织结构中，资源均由职能部门所有和控制，每个项目经理根据项目需要向职能部门借用资源，如上图示。</p>
+<p>在强矩阵型组织中，各项目是一个临时性组织，一旦项目任务完成后就解散，个专业人员又回到各职能部门在执行其他任务。</p>
+<p><strong>3. 平衡矩阵型组织</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20201204211934.jpeg" style="zoom:33%;"></p>
+<p>平衡矩阵型组织（中矩阵组织）是为了加强项目的管理而对弱矩阵型组织的改进。</p>
+<p>与弱矩阵型组织的区别是，在项目团队中任命一名对项目负责的管理者，即项目经理，为此项目项目经理被赋予完成项目任务所应有的职权和责任。</p>
+<p><strong>4. 矩阵型组织的优缺点</strong></p>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有专职项目经理</td>
+<td>结构负责，沟通负责，管理难度大</td>
+</tr>
+<tr>
+<td>项目经理对资源有一定程度的控制权</td>
+<td>项目成员有一个以上的老板</td>
+</tr>
+<tr>
+<td>能取得职能部门的支持</td>
+<td>项目经理与职能经理之间的权力斗争</td>
+</tr>
+<tr>
+<td>资源使用率高</td>
+<td>项目工作与职能工作对资源的争夺</td>
+</tr>
+<tr>
+<td>促进跨部门的协调</td>
+<td>职能部门之间的斗争</td>
+</tr>
+<tr>
+<td>有利于横向信息流通</td>
+<td>需要大量的规章制度和程序</td>
+</tr>
+<tr>
+<td>项目团队成员有家</td>
+<td>项目经理对项目成员没有足够的权力</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-3-5-项目管理办公室（Project-Management-Office-PMO）"><a href="#2-3-5-项目管理办公室（Project-Management-Office-PMO）" class="headerlink" title="2.3.5 项目管理办公室（Project Management Office, PMO）"></a>2.3.5 项目管理办公室（Project Management Office, PMO）</h3><p>在实际工作中PMO的任务为从培训、部署项目管理工具软件，发布标准政策和流程，发布模板直到实际管理项目和项目结构根据需要，PMO执行其中部分或全部工作。</p>
+<p><strong>1. PMO与项目经理</strong></p>
+<p>项目经理和PMO的区别主要体现在以下5个方面：</p>
+<ul>
+<li>项目经理和PMO追求不同的目标，受不同的需求驱使。</li>
+<li>项目经理负责在项目约束条件下完成特定的项目成果性目标，而PMO是具有特殊授权的组织机构，其工作目标包含组织级别的观点。</li>
+<li>项目经理关注与特定的项目目标，而PMO管理重要的大型项目范围的变化，以更好的达到组织战略目标。</li>
+<li>项目经理控制赋予项目的资源以最好的实现项目目标，而PMO对所有项目之间的共享资源进行优化使用。</li>
+<li>项目经理管理中间产品的范围、进度、费用和质量，而PMO管理整体的奉先、整体的机会和所有项目的依赖关系。</li>
+</ul>
+<p><strong>2. PMO的类型</strong></p>
+<p>PMO是对与项目相关的治理过程进行标准化，并促进资源、方法论、工具和技术共享的一种组织结构。分为以下三种类型：</p>
+<ul>
+<li>支持型</li>
+<li>控制型</li>
+<li>指令型</li>
+</ul>
+<p><strong>3. PMO的职能</strong></p>
+<p>组织级PMO的日常性职能：</p>
+<ul>
+<li>监理组织内项目管理的支撑环境</li>
+<li>培养项目管理人员</li>
+<li>提供项目管理的知道与咨询</li>
+<li>组织内的多项目管理与监控</li>
+</ul>
+<p>组织级PMO的战略型智能主要有项目组合管理和提高组织项目管理能力两个方面。</p>
+<p><strong>2.3.6 组织结构的选择</strong></p>
+<p>我们在前面讲到了三大类组织结构，但是在真正的项目管理过程中，应该根据实际的项目进行选择组织结构，而且在不同的项目时期，对项目结构的要求也不一样。项目应该围绕工作来组织，工作变了，项目组织的范围也应跟着改变。</p>
+<p>最后，组织结构对项目的影响。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20201204215214.jpeg" style="zoom:50%;"></p>
+
+      </div>
+        
+          <section class="meta" id="footer-meta">
+            <hr>
+            <div class="new-meta-box">
+              
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-04T21:53:37+08:00">
+                  <a class="notlink">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    2020-12-04
+                  </a>
+                </div>
+              
+              
+                
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/项目与组织/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;项目与组织</a></div>
+              
+              
+            </div>
+          </section>
+        
+
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/the-key-to-pmp-1.html" rel="prev" title="【PMP之路】一、项目和项目经理">
+                                    
+                                        【PMP之路】一、项目和项目经理
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/项目与项目经理/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>项目与项目经理</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      
+      
+        <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+        
+        
+        
+          
+            <section id="comments">
+              <div id="valine_container" class="valine_thread">
+                <i class="fas fa-spinner fa-spin fa-fw"></i>
+              </div>
+            </section>
+          
+        
+      
+    </section>
+  </article>
+
+
+
+<script>
+    window.subData = {
+        title: '【PMP之路】二、项目生命周期与组织',
+        tools: true
+    }
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+  
+  
+    
+      
+      
+        <section class="author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/avatar/avatar.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:me@rocwong.cn" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-envelope" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://github.com/rocwong-cn" class="social flat-btn" target="_blank" rel="external"><i class="social fab fa-github" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=64405940" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-music" aria-hidden="true"></i></a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-项目生命周期"><span class="toc-text">2.1 项目生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-生命周期模型"><span class="toc-text">2.1.1 生命周期模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-项目生命周期的共同特点"><span class="toc-text">2.1.2 项目生命周期的共同特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-事业环境因素与组织过程资产"><span class="toc-text">2.2 事业环境因素与组织过程资产</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-事业环境因素"><span class="toc-text">2.2.1 事业环境因素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-组织过程资产"><span class="toc-text">2.2.2 组织过程资产</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-组织对项目管理的影响"><span class="toc-text">2.3 组织对项目管理的影响</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-组织系统"><span class="toc-text">2.3.1 组织系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-职能型组织"><span class="toc-text">2.3.2 职能型组织</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-项目型组织"><span class="toc-text">2.3.3 项目型组织</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-矩阵型组织"><span class="toc-text">2.3.4 矩阵型组织</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-5-项目管理办公室（Project-Management-Office-PMO）"><span class="toc-text">2.3.5 项目管理办公室（Project Management Office, PMO）</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/AI/" style="font-size: 14px; color: #999">AI</a> <a href="/tags/HTML5/" style="font-size: 14px; color: #999">HTML5</a> <a href="/tags/Homebrew/" style="font-size: 14px; color: #999">Homebrew</a> <a href="/tags/JS/" style="font-size: 24px; color: #555">JS</a> <a href="/tags/Jenkins/" style="font-size: 14px; color: #999">Jenkins</a> <a href="/tags/PWA/" style="font-size: 14px; color: #999">PWA</a> <a href="/tags/React-Native/" style="font-size: 14px; color: #999">React-Native</a> <a href="/tags/android/" style="font-size: 14px; color: #999">android</a> <a href="/tags/canvas/" style="font-size: 14px; color: #999">canvas</a> <a href="/tags/centos/" style="font-size: 14px; color: #999">centos</a> <a href="/tags/commitlint/" style="font-size: 14px; color: #999">commitlint</a> <a href="/tags/puppeteer/" style="font-size: 14px; color: #999">puppeteer</a> <a href="/tags/react/" style="font-size: 14px; color: #999">react</a> <a href="/tags/typescript/" style="font-size: 14px; color: #999">typescript</a> <a href="/tags/vue/" style="font-size: 14px; color: #999">vue</a> <a href="/tags/位移运算/" style="font-size: 14px; color: #999">位移运算</a> <a href="/tags/单例模式/" style="font-size: 14px; color: #999">单例模式</a> <a href="/tags/原型链/" style="font-size: 14px; color: #999">原型链</a> <a href="/tags/又是一年/" style="font-size: 20.67px; color: #6c6c6c">又是一年</a> <a href="/tags/好物推荐/" style="font-size: 17.33px; color: #828282">好物推荐</a> <a href="/tags/工厂模式/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/数据结构/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/构建工具/" style="font-size: 14px; color: #999">构建工具</a> <a href="/tags/柯里化/" style="font-size: 14px; color: #999">柯里化</a> <a href="/tags/观察者模式/" style="font-size: 14px; color: #999">观察者模式</a> <a href="/tags/读书笔记/" style="font-size: 20.67px; color: #6c6c6c">读书笔记</a> <a href="/tags/进程与线程/" style="font-size: 14px; color: #999">进程与线程</a> <a href="/tags/面试经历/" style="font-size: 14px; color: #999">面试经历</a> <a href="/tags/项目与组织/" style="font-size: 14px; color: #999">项目与组织</a> <a href="/tags/项目与项目经理/" style="font-size: 14px; color: #999">项目与项目经理</a>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class="category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;所有分类</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/PMP之路/" href="/categories/PMP之路/"><div class="name">PMP之路</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/fabricjs/" href="/categories/fabricjs/"><div class="name">fabricjs</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/xxx/" href="/categories/xxx/"><div class="name">xxx</div><div class="badge">(0)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/前端工程化/" href="/categories/前端工程化/"><div class="name">前端工程化</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/基础原理/" href="/categories/基础原理/"><div class="name">基础原理</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/学习笔记/" href="/categories/学习笔记/"><div class="name">学习笔记</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/年终总结/" href="/categories/年终总结/"><div class="name">年终总结</div><div class="badge">(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/微前端/" href="/categories/微前端/"><div class="name">微前端</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/我爱折腾/" href="/categories/我爱折腾/"><div class="name">我爱折腾</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/服务器操作/" href="/categories/服务器操作/"><div class="name">服务器操作</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/每日一题/" href="/categories/每日一题/"><div class="name">每日一题</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/浏览器/" href="/categories/浏览器/"><div class="name">浏览器</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/移动端开发/" href="/categories/移动端开发/"><div class="name">移动端开发</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/算法相关/" href="/categories/算法相关/"><div class="name">算法相关</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/编码规范/" href="/categories/编码规范/"><div class="name">编码规范</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/装机必备/" href="/categories/装机必备/"><div class="name">装机必备</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/设计模式/" href="/categories/设计模式/"><div class="name">设计模式</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/译文/" href="/categories/译文/"><div class="name">译文</div><div class="badge">(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/进阶心法/" href="/categories/进阶心法/"><div class="name">进阶心法</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/项目部署/" href="/categories/项目部署/"><div class="name">项目部署</div><div class="badge">(3)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+      
+    
+  
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+    </div>
+    <footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:me@rocwong.cn" class="social fas fa-envelope flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://github.com/rocwong-cn" class="social fab fa-github flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://music.163.com/#/user/home?id=64405940" class="social fas fa-music flat-btn" target="_blank" rel="external"></a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>本站使用 <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a> 作为主题，总访问量为 <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+  </div>
+  <div><a href="http://www.beian.miit.gov.cn/" rel="nofollow">京ICP备18022839号-1</a></div>
+</footer>
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        const $reveal = $('.reveal');
+    		if ($reveal.length === 0) return;
+    		const sr = ScrollReveal({ distance: 0 });
+    		sr.reveal('.reveal');
+      });
+    </script>
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        Waves.attach('.flat-btn', ['waves-button']);
+        Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+        Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+        Waves.attach('.flat-box', ['waves-block']);
+        Waves.attach('.float-box', ['waves-block', 'waves-float']);
+        Waves.attach('.waves-image');
+        Waves.init();
+      });
+    </script>
+  
+  
+    <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+  
+  
+  
+
+  
+  
+    
+      
+      
+      
+        
+          <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+          
+            
+              <script src="/js/volantis.js"></script>
+            
+          
+          <script>
+          var GUEST_INFO = ['nick','mail','link'];
+          var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var notify = 'false' == true;
+          var verify = 'false' == true;
+          var valine = new Valine();
+          valine.init({
+            el: '#valine_container',
+            notify: notify,
+            verify: verify,
+            guest_info: guest_info,
+            
+            appId: "gYp5OOFzzylucF3XlyJk6T5a-gzGzoHsz",
+            appKey: "fzh2pJLE0OYsBEt718W40wfB",
+            placeholder: "快来评论吧~",
+            pageSize:'10',
+            avatar:'monsterid',
+            lang:'zh-cn',
+            highlight:''
+          })
+          </script>
+        
+      
+    
+  
+  
+    <script src="/js/app.js"></script>
+<script src="/js/search.js"></script>
+  
+
+
+
+
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
