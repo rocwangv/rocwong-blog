@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>前端工程化之 git 提交信息风格统一 | RocWong&#39;s Blog</title>
+  <title>漫谈设计模式之责任链模式 | RocWong&#39;s Blog</title>
   
-  <meta name="keywords" content="commitlint,husky, 前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
+  <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
   
   
 
@@ -196,7 +196,7 @@
   <div class="meta" id="header-meta">
     
       
-          <h1 class="title">前端工程化之 git 提交信息风格统一</h1>
+          <h1 class="title">漫谈设计模式之责任链模式</h1>
       
     
 
@@ -213,7 +213,7 @@
         <div class="new-meta-item date">
           <a class="notlink">
             <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-            2020-11-05
+            2021-01-16
           </a>
         </div>
       
@@ -221,9 +221,9 @@
         
           
           <div class="new-meta-item category">
-            <a href="/categories/前端工程化/">
+            <a href="/categories/设计模式/">
               <i class="fas fa-folder-open" aria-hidden="true"></i>
-              前端工程化
+              设计模式
             </a>
           </div>
         
@@ -248,36 +248,35 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/commitlint.png" alt="commitlint"></p>
- <a id="more"></a>
-<p>在一个团队中，每个人的 git 的 commit 信息都不一样，五花八门，没有一个机制很难保证规范化，如何才能规范化呢？可能你想到的是 git 的 hook 机制，去写 shell 脚本去实现。这当然可以，其实 JavaScript 有一个很好的工具可以实现这个约束，它就是 commitlint。<br>接下来将会讲解如何一步步的使用commitlint。</p>
-<h2 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h2><p>安装以下三个工具库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D husky @commitlint/cli @commitlint/config-conventional</span><br></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>打开 <code>package.json</code> 文件，加入以下代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"commitlint"</span>: &#123;</span><br><span class="line">  <span class="string">"extends"</span>: [</span><br><span class="line">    <span class="string">"@commitlint/config-conventional"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"husky"</span>: &#123;</span><br><span class="line">  <span class="string">"hooks"</span>: &#123;</span><br><span class="line">    <span class="string">"commit-msg"</span>: <span class="string">"commitlint -E HUSKY_GIT_PARAMS"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时，若在项目下进行代码提交时，如果不符合既定风格的话，会提示以下信息<br><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20201105173907.png" alt="a"></p>
-<p>对于 <code>commitlint</code>来说，一般情况下，默认的配置就够用了。但是如果想要自定义限制这些规则，不启用默认规则的话，可以在项目目录下创建 <code>commitlint.config.js</code>文件，进行更详细的配置：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  extends: [</span><br><span class="line">    <span class="string">"@commitlint/config-conventional"</span></span><br><span class="line">  ],</span><br><span class="line">  rules: &#123;</span><br><span class="line">    <span class="string">'type-enum'</span>: [<span class="number">2</span>, <span class="string">'always'</span>, [</span><br><span class="line">      <span class="string">'upd'</span>, <span class="string">'feat'</span>, <span class="string">'fix'</span>, <span class="string">'refactor'</span>, <span class="string">'docs'</span>, <span class="string">'chore'</span>, <span class="string">'style'</span>, <span class="string">'revert'</span></span><br><span class="line">     ]],</span><br><span class="line">    <span class="string">'type-case'</span>: [<span class="number">0</span>],</span><br><span class="line">    <span class="string">'type-empty'</span>: [<span class="number">0</span>],</span><br><span class="line">    <span class="string">'scope-empty'</span>: [<span class="number">0</span>],</span><br><span class="line">    <span class="string">'scope-case'</span>: [<span class="number">0</span>],</span><br><span class="line">    <span class="string">'subject-full-stop'</span>: [<span class="number">0</span>, <span class="string">'never'</span>],</span><br><span class="line">    <span class="string">'subject-case'</span>: [<span class="number">0</span>, <span class="string">'never'</span>],</span><br><span class="line">    <span class="string">'header-max-length'</span>: [<span class="number">0</span>, <span class="string">'always'</span>, <span class="number">72</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>rule配置说明：rule由name和配置数组组成，如：<code>&#39;name:[0, &#39;always&#39;, 72]&#39;</code>，数组中第一位为 level，可选0,1,2，0为disable，1为warning，2为error，第二位为应用与否，可选<code>always|never</code>，第三位该rule的值。</p>
-<p>具体配置参考<a href="https://commitlint.js.org/#/reference-configuration" target="_blank" rel="noopener">官方文档</a></p>
-<h2 id="使用-commitizen-生成良好格式的提交信息"><a href="#使用-commitizen-生成良好格式的提交信息" class="headerlink" title="使用 commitizen 生成良好格式的提交信息"></a>使用 commitizen 生成良好格式的提交信息</h2><p><a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank" rel="noopener">Conventional Commits</a> 格式良好的提交信息如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意：冒号前面是需要一个空格的, 带 ？ 表示非必填信息</span></span><br><span class="line"><span class="built_in">type</span>(scope?): subject</span><br><span class="line">body?</span><br><span class="line">footer?</span><br></pre></td></tr></table></figure>
-<p>上面动图的提示信息内提到了两点 <code>subject</code> 和 <code>type</code>，如何快速生成一个符合 <code>commitlint</code> 的提交信息呢？我们可以使用 <code>commitizen</code> 这个工具库，首先进行全局安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add global commitizen</span><br></pre></td></tr></table></figure>
-<p>在项目中进行自定义提交类型和选项，首先需要进行安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D cz-customizable</span><br></pre></td></tr></table></figure>
-<p>在 package.json 中添加如下代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"config"</span>: &#123;</span><br><span class="line">    <span class="string">"commitizen"</span>: &#123;</span><br><span class="line">      <span class="string">"path"</span>: <span class="string">"node_modules/cz-customizable"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在项目根目录下新增 <a href="https://github.com/rocwong-cn/try-commitizen/blob/master/.cz-config.js" target="_blank" rel="noopener">.cz-config.js</a> 文件</p>
-<p>此时，我们就可以使用 <code>git cz</code> 来替代 <code>git commit -m</code> 来进行代码提交了</p>
-<p><img src="https://s04.cdn.ipalfish.com/static/omp-upload-1604569978524-gitcz.gif" alt="cz"></p>
-<h2 id="自动生成changelog"><a href="#自动生成changelog" class="headerlink" title="自动生成changelog"></a>自动生成changelog</h2><p>当我们具备了格式良好的 Git message 后，就可以使用脚本一键生成该版本的变更记录了</p>
-<p>安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global -D conventional-changelog-cli</span><br></pre></td></tr></table></figure>
-<p>在项目的 package.json 中增加如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"changelog"</span>: <span class="string">"conventional-changelog -p angular -i CHANGELOG.md -s &amp;&amp; git add CHANGELOG.md"</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-<p>之后使用 <code>yarn changelog</code> 命令即可生成 <code>CHANGELOG.md</code>。</p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>本文中使用的项目代码：<a href="https://github.com/rocwong-cn/try-commitizen" target="_blank" rel="noopener">try-commitizen</a></p>
+        <p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210116211920.png" alt="pic"><br> <a id="more"></a></p>
+<p>责任链模式指的是——某个请求需要多个对象进行处理，从而避免请求的发送者和接收之间的耦合关系。将这些对象连成一条链子，并沿着这条链子传递该请求，直到有对象处理它为止。</p>
+<p>从生活中的例子可以发现，某个请求可能需要几个人的审批，即使技术经理审批完了，还需要上一级的审批。这样的例子，还有公司中的请假，少于3天的，直属Leader就可以批准，3天到7天之内就需要项目经理批准，多余7天的就需要技术总监的批准了。介绍了这么多生活中责任链模式的例子的，下面具体给出面向对象中责任链模式的定义。</p>
+<p>责任链模式涉及的对象只有处理者角色，但由于有多个处理者，它们具有共同的处理请求的方法，所以这里抽象出一个抽象处理者角色进行代码复用.</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<li>请求类</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 采购请求</span></span><br><span class="line"><span class="keyword">let</span> PurchaseRequest = <span class="function"><span class="keyword">function</span> (<span class="params">amount, productName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.amount = amount;</span><br><span class="line">    <span class="keyword">this</span>.productName = productName;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理者接口类</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 审批人,Handler</span></span><br><span class="line"><span class="keyword">let</span> Approver = <span class="function"><span class="keyword">function</span> (<span class="params">name, nextApprover</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.nextApprover = nextApprover;</span><br><span class="line">&#125;;</span><br><span class="line">Approver.prototype.processRequest = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>();  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理者类</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConcreteHandler</span></span><br><span class="line"><span class="keyword">let</span> Manager = <span class="function"><span class="keyword">function</span> (<span class="params">name, nextApprover</span>) </span>&#123;</span><br><span class="line">    Approver.call(<span class="keyword">this</span>, name, nextApprover);</span><br><span class="line">&#125;;</span><br><span class="line">extend(Manager, Approver);</span><br><span class="line">Manager.prototype.processRequest = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (request.Amount &lt; <span class="number">10000.0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'ok'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (NextApprover != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.nextApprover.ProcessRequest(request);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;    </span><br><span class="line">    </span><br><span class="line"><span class="comment">// ConcreteHandler,副总</span></span><br><span class="line"><span class="keyword">let</span> VicePresident = <span class="function"><span class="keyword">function</span> (<span class="params">name, nextApprover</span>) </span>&#123;</span><br><span class="line">    Approver.call(<span class="keyword">this</span>, name, nextApprover);</span><br><span class="line">&#125;;</span><br><span class="line">extend(VicePresident, Approver);</span><br><span class="line">VicePresident.prototype.processRequest = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (request.Amount &lt; <span class="number">25000.0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'ok'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (NextApprover != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.nextApprover.ProcessRequest(request);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ConcreteHandler，总经理</span></span><br><span class="line"><span class="keyword">let</span> President = <span class="function"><span class="keyword">function</span> (<span class="params">name, nextApprover</span>) </span>&#123;</span><br><span class="line">    Approver.call(<span class="keyword">this</span>, name, nextApprover);</span><br><span class="line">&#125;;</span><br><span class="line">extend(President, Approver);</span><br><span class="line">President.prototype.processRequest = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (request.Amount &lt; <span class="number">100000.0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'ok'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (NextApprover != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.nextApprover.ProcessRequest(request);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> requestTelphone = <span class="keyword">new</span> PurchaseRequest(<span class="number">4000.0</span>, <span class="string">"Telphone"</span>);</span><br><span class="line"><span class="keyword">let</span> requestSoftware = <span class="keyword">new</span> PurchaseRequest(<span class="number">10000.0</span>, <span class="string">"Visual Studio"</span>);</span><br><span class="line"><span class="keyword">let</span> requestComputers = <span class="keyword">new</span> PurchaseRequest(<span class="number">40000.0</span>, <span class="string">"Computers"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> manager = <span class="keyword">new</span> Manager(<span class="string">"LearningHard"</span>);</span><br><span class="line"><span class="keyword">let</span> Vp = <span class="keyword">new</span> VicePresident(<span class="string">"Tony"</span>);</span><br><span class="line"><span class="keyword">let</span> Pre = <span class="keyword">new</span> President(<span class="string">"BossTom"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置责任链</span></span><br><span class="line">manager.NextApprover = Vp;</span><br><span class="line">Vp.NextApprover = Pre;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理请求</span></span><br><span class="line">manager.ProcessRequest(requestTelphone);</span><br><span class="line">manager.ProcessRequest(requestSoftware);</span><br><span class="line">manager.ProcessRequest(requestComputers);</span><br></pre></td></tr></table></figure>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>一个系统的审批需要多个对象才能完成处理的情况下，例如请假系统等。</li>
+<li>代码中存在多个if-else语句的情况下，此时可以考虑使用责任链模式来对代码进行重构。</li>
+</ul>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>降低了请求的发送者和接收者之间的耦合。</li>
+<li>把多个条件判定分散到各个处理类中，使得代码更加清晰，责任更加明确。</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>在找到正确的处理对象之前，所有的条件判定都要执行一遍，当责任链过长时，可能会引起性能的问题, 可能导致某个请求不被处理。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>*责任链降低了请求端和接收端之间的耦合，使多个对象都有机会处理某个请求。使得责任分割, 更具体, 有助于拓展</p>
 
       </div>
         
@@ -285,16 +284,16 @@
             <hr>
             <div class="new-meta-box">
               
-                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-05T18:10:23+08:00">
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-16T21:20:05+08:00">
                   <a class="notlink">
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                    2020-11-05
+                    2021-01-16
                   </a>
                 </div>
               
               
                 
-                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/commitlint/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;commitlint</a></div>
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/责任链模式/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;责任链模式</a></div>
               
               
             </div>
@@ -304,40 +303,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                            <h4>
-                                <a href="/the-key-to-pmp-1.html" rel="prev" title="【PMP之路】一、项目和项目经理">
-                                  
-                                      【PMP之路】一、项目和项目经理
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/项目与项目经理/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>项目与项目经理</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/npm-modules.html" rel="prev" title="一些能提升生产力的轮子收集">
+                                <a href="/the-way-to-pmp-3.html" rel="prev" title="【PMP之路】三、项目管理过程">
                                     
-                                        一些能提升生产力的轮子收集
+                                        【PMP之路】三、项目管理过程
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/好物推荐/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>好物推荐</a>
+                                    <a class="tag" href="/tags/项目管理/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>项目管理</a>
                                 </h6>
                             
                         </span>
@@ -383,7 +363,7 @@
 
 <script>
     window.subData = {
-        title: '前端工程化之 git 提交信息风格统一',
+        title: '漫谈设计模式之责任链模式',
         tools: true
     }
 </script>
@@ -442,7 +422,7 @@
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖安装"><span class="toc-text">依赖安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-commitizen-生成良好格式的提交信息"><span class="toc-text">使用 commitizen 生成良好格式的提交信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动生成changelog"><span class="toc-text">自动生成changelog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源"><span class="toc-text">资源</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用场景"><span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缺点"><span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
