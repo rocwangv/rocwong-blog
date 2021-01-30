@@ -100,14 +100,14 @@
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/mind/index.html</loc>
+    <loc>http://www.rocwong.cn/project/index.html</loc>
     
     <lastmod>2020-08-01T10:08:09.391Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/project/index.html</loc>
+    <loc>http://www.rocwong.cn/mind/index.html</loc>
     
     <lastmod>2020-08-01T10:08:09.391Z</lastmod>
     
@@ -177,13 +177,6 @@
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/three-courses-for-programmers-cpt-1.html</loc>
-    
-    <lastmod>2020-08-01T10:08:09.386Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.rocwong.cn/what-I-installed-in-my-mac.html</loc>
     
     <lastmod>2020-08-01T10:08:09.386Z</lastmod>
@@ -194,6 +187,20 @@
     <loc>http://www.rocwong.cn/what-happens-when-type-url-in-broswer.html</loc>
     
     <lastmod>2020-08-01T10:08:09.386Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.rocwong.cn/three-courses-for-programmers-cpt-1.html</loc>
+    
+    <lastmod>2020-08-01T10:08:09.386Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.rocwong.cn/react%E9%A1%B9%E7%9B%AE%E5%9C%A8%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88.html</loc>
+    
+    <lastmod>2020-08-01T10:08:09.385Z</lastmod>
     
   </url>
   
@@ -213,13 +220,6 @@
   
   <url>
     <loc>http://www.rocwong.cn/summary-of-2019.html</loc>
-    
-    <lastmod>2020-08-01T10:08:09.385Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.rocwong.cn/react%E9%A1%B9%E7%9B%AE%E5%9C%A8%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88.html</loc>
     
     <lastmod>2020-08-01T10:08:09.385Z</lastmod>
     
@@ -282,13 +282,6 @@
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/data-structure.html</loc>
-    
-    <lastmod>2020-08-01T10:08:09.382Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.rocwong.cn/clean-code-js.html</loc>
     
     <lastmod>2020-08-01T10:08:09.382Z</lastmod>
@@ -297,6 +290,13 @@
   
   <url>
     <loc>http://www.rocwong.cn/design-pattern-factory.html</loc>
+    
+    <lastmod>2020-08-01T10:08:09.382Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.rocwong.cn/data-structure.html</loc>
     
     <lastmod>2020-08-01T10:08:09.382Z</lastmod>
     
