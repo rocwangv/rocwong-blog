@@ -267,7 +267,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> mainMethod() &#123;</span><br><span class="line">        AirController airController = <span class="keyword">new</span> AirController();</span><br><span class="line">        airController.turnDown();</span><br><span class="line">        airController.adjustDegree();</span><br><span class="line">        airController.adjustWindPower();</span><br><span class="line">        airController.powerOff();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line">Client.mainMethod();</span><br></pre></td></tr></table></figure>
 <p>打印结果：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动空调</span><br><span class="line">调低温度</span><br><span class="line">调整风扇角度</span><br><span class="line">调整风速大小</span><br><span class="line">关闭空调</span><br></pre></td></tr></table></figure>
-<p>不难理解，门面模式实现了各子系统之间的关联，同时不必在意子系统内部的具体实现，通过统一一个 <code>AirController</code> 门面来提供给客户端调用，简化使用。</p>
+<p>不难理解，门面模式实现了各子系统之间的关联，同时不必在意子系统内部的具体实现，通过统一一个 <code>AirController</code> 门面来提供给客户端调用，简化使用</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>门面模式的优点显而易见，对于其缺点有几点需要说明，通过上面的例子或多或少可以看出门面模式存在以下几个问题： - 由于子系统的增加或其提供的接口的增加，会导致门面类接口膨胀冗余； - 外观类没有遵循开闭原则，不符合“对修改关闭，对扩展开放”的定义，当业务变更时，需要直接对外观类进行修改。</p>
 
       </div>
@@ -276,7 +276,7 @@
             <hr>
             <div class="new-meta-box">
               
-                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-30T20:54:26+08:00">
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-30T21:00:58+08:00">
                   <a class="notlink">
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                     2021-01-30
