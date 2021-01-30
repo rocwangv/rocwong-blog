@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>思维 | RocWong&#39;s Blog</title>
+  <title>漫谈设计模式之门面模式 | RocWong&#39;s Blog</title>
   
-  <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
+  <meta name="keywords" content="设计模式,门面模式, 前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
   
   
 
@@ -188,7 +188,7 @@
     <div class="l_body">
     <div class='container clearfix'>
         <div class='l_main'>
-            <article id="page" class="post white-box article-type-page" itemscope itemprop="blogPost">
+            <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
   
 <section class="meta">
   
@@ -196,7 +196,7 @@
   <div class="meta" id="header-meta">
     
       
-          <h1 class="title">思维</h1>
+          <h1 class="title">漫谈设计模式之门面模式</h1>
       
     
 
@@ -213,10 +213,20 @@
         <div class="new-meta-item date">
           <a class="notlink">
             <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-            2020-08-01
+            2021-01-30
           </a>
         </div>
       
+      
+        
+          
+          <div class="new-meta-item category">
+            <a href="/categories/设计模式/">
+              <i class="fas fa-folder-open" aria-hidden="true"></i>
+              设计模式
+            </a>
+          </div>
+        
       
       
         
@@ -238,18 +248,74 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <blockquote>
-<p>一图胜千言。</p>
+        <p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210130205410.png" alt="门面模式"></p>
+ <a id="more"></a>
+<p>门面模式又叫做外观模式，是常见的设计模式之一。在代码中可能无意之中就会使用到门面模式，甚至一些第三方开源 SDK 为了简化 API 调用，减少内部细节的暴露，可能会提供类似门面模式的接口，方便开发者使用。</p>
+<p>来看一下外观模式的定义：</p>
+<blockquote>
+<p>要求一个子系统的外部与其内部的通信必须通过一个统一的对象进行。门面模式提供一个高层次的接口，使得子系统更易于使用。</p>
 </blockquote>
-<p><a href="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/xmind/advanced-data-structure.png" target="_blank"><br>  <img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/xmind/advanced-data-structure.png" alt="高级数据结构"><br></a></p>
-<p><a href="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/xmind/data-structure.png" target="_blank"><br>  <img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/xmind/data-structure.png" alt="数据结构"><br></a></p>
-<p><a href="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/xmind/react-hooks.png" target="_blank"><br>  <img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/xmind/react-hooks.png" alt="react hooks"><br></a></p>
-<p><a href="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/xmind/optimization-of-vue3.png" target="_blank"><br>  <img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/xmind/optimization-of-vue3.png" alt="vue 3.0 的优化"><br></a></p>
-<p><a href="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/micro/1.png" target="_blank"><br>  <img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/micro/1.png" alt="什么是微前端"><br></a></p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>下面通过一个空调系统，来解释门面模式的使用。首先， 定义空调的开关系统：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">class</span> PowerSystem &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">boolean</span> started;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">void</span> powerOn() &#123;</span><br><span class="line">        <span class="keyword">if</span> (!started) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"启动空调"</span>);</span><br><span class="line">            started = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">void</span> powerOff() &#123;</span><br><span class="line">        <span class="keyword">if</span> (started) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"关闭空调"</span>);</span><br><span class="line">            started = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后是风扇系统：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">class</span> FanSystem &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">void</span> adjustDegree() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"调整风扇角度"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">void</span> adjustPower() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"调整风速大小"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后定义温控系统：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">class</span> TempSystem &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">void</span> turnUp() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"调高温度"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">void</span> turnDown() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"调低温度"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>三个与空调相关的子系统定义好之后，就来定义我们的门面（Facade）对象了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">AirController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    private FanSystem fanSystem = <span class="keyword">new</span> FanSystem();</span><br><span class="line">    private PowerSystem powerSystem = <span class="keyword">new</span> PowerSystem();</span><br><span class="line">    private TempSystem tempSystem = <span class="keyword">new</span> TempSystem();</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">void</span> adjustDegree() &#123;</span><br><span class="line">        powerSystem.powerOn();</span><br><span class="line">        fanSystem.adjustDegree();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">void</span> adjustWindPower() &#123;</span><br><span class="line">        powerSystem.powerOn();</span><br><span class="line">        fanSystem.adjustPower();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">void</span> turnUp() &#123;</span><br><span class="line">        powerSystem.powerOn();</span><br><span class="line">        tempSystem.turnUp();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">void</span> turnDown() &#123;</span><br><span class="line">        powerSystem.powerOn();</span><br><span class="line">        tempSystem.turnDown();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">void</span> powerOff() &#123;</span><br><span class="line">        powerSystem.powerOff();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">void</span> powerOn() &#123;</span><br><span class="line">        powerSystem.powerOn();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义客户类，模拟空调系统调用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> mainMethod() &#123;</span><br><span class="line">        AirController airController = <span class="keyword">new</span> AirController();</span><br><span class="line">        airController.turnDown();</span><br><span class="line">        airController.adjustDegree();</span><br><span class="line">        airController.adjustWindPower();</span><br><span class="line">        airController.powerOff();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line">Client.mainMethod();</span><br></pre></td></tr></table></figure>
+<p>打印结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动空调</span><br><span class="line">调低温度</span><br><span class="line">调整风扇角度</span><br><span class="line">调整风速大小</span><br><span class="line">关闭空调</span><br></pre></td></tr></table></figure>
+<p>不难理解，门面模式实现了各子系统之间的关联，同时不必在意子系统内部的具体实现，通过统一一个 <code>AirController</code> 门面来提供给客户端调用，简化使用。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>门面模式的优点显而易见，对于其缺点有几点需要说明，通过上面的例子或多或少可以看出门面模式存在以下几个问题： - 由于子系统的增加或其提供的接口的增加，会导致门面类接口膨胀冗余； - 外观类没有遵循开闭原则，不符合“对修改关闭，对扩展开放”的定义，当业务变更时，需要直接对外观类进行修改。</p>
 
       </div>
         
+          <section class="meta" id="footer-meta">
+            <hr>
+            <div class="new-meta-box">
+              
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-30T20:54:26+08:00">
+                  <a class="notlink">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    2021-01-30
+                  </a>
+                </div>
+              
+              
+                
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/门面模式/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;门面模式</a></div>
+              
+              
+            </div>
+          </section>
+        
 
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/design-pattern-responsiblity.html" rel="prev" title="漫谈设计模式之责任链模式">
+                                    
+                                        漫谈设计模式之责任链模式
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/责任链模式/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>责任链模式</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
         
 
     </section>
@@ -289,10 +355,11 @@
 
 <script>
     window.subData = {
-        title: '思维',
+        title: '漫谈设计模式之门面模式',
         tools: true
     }
 </script>
+
 
         </div>
         <aside class='l_side'>
@@ -337,6 +404,20 @@
       
       
         
+  <section class="toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
 
       
     
