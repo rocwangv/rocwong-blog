@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>当向浏览器中输入URL后发生了什么 | RocWong&#39;s Blog</title>
+  <title>从一道题目探究promise的使用技巧 | RocWong&#39;s Blog</title>
   
   <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
   
@@ -196,7 +196,7 @@
   <div class="meta" id="header-meta">
     
       
-          <h1 class="title">当向浏览器中输入URL后发生了什么</h1>
+          <h1 class="title">从一道题目探究promise的使用技巧</h1>
       
     
 
@@ -213,7 +213,7 @@
         <div class="new-meta-item date">
           <a class="notlink">
             <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-            2020-07-06
+            2021-03-27
           </a>
         </div>
       
@@ -221,9 +221,9 @@
         
           
           <div class="new-meta-item category">
-            <a href="/categories/浏览器/">
+            <a href="/categories/学习笔记/">
               <i class="fas fa-folder-open" aria-hidden="true"></i>
-              浏览器
+              学习笔记
             </a>
           </div>
         
@@ -248,57 +248,29 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h2 id="1、输入网址"><a href="#1、输入网址" class="headerlink" title="1、输入网址"></a>1、输入网址</h2><p>当你开始输入网址比如<code>www.rocwong.cn</code>时浏览器就可以在书签或者历史记录里面去搜索相关的网址推荐给你。</p>
+        <p>如下为一段代码，请完善sum函数，使得 sum(1,2,3,4,5,6) 函数返回值为 21 ,需要在 sum 函数中调用 asyncAdd 函数进行数值运算，且不能修改asyncAdd函数</p>
  <a id="more"></a>
-<h2 id="2、浏览器查找域名的IP地址"><a href="#2、浏览器查找域名的IP地址" class="headerlink" title="2、浏览器查找域名的IP地址"></a>2、浏览器查找域名的IP地址</h2><p>① 请求发起后，浏览器首先会解析这个域名，首先它会查看本地硬盘的 hosts 文件，看看其中有没有和这个域名对应的规则，如果有的话就直接使用 hosts 文件里面的 ip 地址。</p>
-<p>② 如果在本地的 hosts 文件没有能够找到对应的 ip 地址，浏览器会发出一个 DNS请求到本地DNS(域名分布系统)服务器 。本地DNS服务器一般都是你的网络接入服务器商提供，比如中国电信，中国移动。</p>
-<p>③ 查询你输入的网址的DNS请求到达本地DNS服务器之后，本地DNS服务器会首先查询它的缓存记录，如果缓存中有此条记录，就可以直接返回结果，此过程是递归的方式进行查询。如果没有，本地DNS服务器还要向DNS根服务器进行查询</p>
-<p>④ 根DNS服务器没有记录具体的域名和IP地址的对应关系，而是告诉本地DNS服务器，你可以到域服务器上去继续查询，并给出域服务器的地址。这种过程是迭代的过程</p>
-<p>⑤ 本地DNS服务器继续向域服务器发出请求，在这个例子中，请求的对象是.com域服务器。.com域服务器收到请求之后，也不会直接返回域名和IP地址的对应关系，而是告诉本地DNS服务器，你的域名的解析服务器的地址</p>
-<p>⑥ 最后，本地DNS服务器向域名的解析服务器发出请求，这时就能收到一个域名和IP地址对应关系，本地DNS服务器不仅要把IP地址返回给用户电脑，还要把这个对应关系保存在缓存中，以备下次别的用户查询时，可以直接返回结果，加快网络访问。</p>
-<p><img src="https://images2017.cnblogs.com/blog/1171046/201712/1171046-20171226173034151-855747573.jpg" alt></p>
-<h2 id="3、建立TCP链接"><a href="#3、建立TCP链接" class="headerlink" title="3、建立TCP链接"></a>3、建立TCP链接</h2><p>在拿到域名对应的IP地址后，会以随机端口（1024~~65535）向WEB服务器程序80端口发起TCP的连接请求，这个连接请求进入到内核的TCP/IP协议栈（用于识别该连接请求，解封包，一层一层的剥开），还有可能要经过Netfilter防火墙（属于内核的模块）的过滤，最终到达WEB程序，最终建立了TCP/IP的连接，对于客户端与服务器的TCP链接，必然要说的就是『三次握手』。</p>
-<p><img src="https://img2018.cnblogs.com/blog/1171046/201904/1171046-20190409190539159-883745097.png" alt></p>
-<p>客户端发送一个带有SYN标志的数据包给服务端，服务端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息，最后客户端再回传一个带ACK标志的数据包，代表握手结束，连接成功。</p>
-<pre><code>通俗化之后就是：
-
-客户端：老弟我要跟你链接
-
-服务端：好的，同意了
-
-客户端：好嘞
-</code></pre><h2 id="4、浏览器向WEB服务器发起Http请求"><a href="#4、浏览器向WEB服务器发起Http请求" class="headerlink" title="4、浏览器向WEB服务器发起Http请求"></a>4、浏览器向WEB服务器发起Http请求</h2><p>建立TCP连接之后，发起HTTP请求，请求一般分为三部分</p>
-<p>请求方法URI协议/版本</p>
-<p>请求头(Request Header)</p>
-<p>请求正文</p>
-<p>下面是一个完整的请求</p>
-<p><img src="https://img-blog.csdn.net/20180519235118178?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsZXhzaGk1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p>详细的就不描述了，网上很多说明的。</p>
-<h2 id="5、服务器端处理"><a href="#5、服务器端处理" class="headerlink" title="5、服务器端处理"></a>5、服务器端处理</h2><p>服务器端收到请求后的由web服务器（准确说应该是http服务器）处理请求，诸如Apache、Ngnix、IIS等。web服务器解析用户请求，知道了需要调度哪些资源文件，再通过相应的这些资源文件处理用户请求和参数，并调用数据库信息，最后将结果通过web服务器返回给浏览器客户端。</p>
-<p><img src="https://img2018.cnblogs.com/blog/1171046/201904/1171046-20190409191054591-1163748805.png" alt></p>
-<h2 id="6、关闭TCP链接"><a href="#6、关闭TCP链接" class="headerlink" title="6、关闭TCP链接"></a>6、关闭TCP链接</h2><p>为了避免服务器与客户端双方的资源占用和损耗，当双方没有请求或响应传递时，任意一方都可以发起关闭请求。与创建TCP连接的3次握手类似，关闭TCP连接，需要4次握手。<br><img src="https://img2018.cnblogs.com/blog/1171046/201904/1171046-20190409191208891-688664454.png" alt></p>
-<pre><code>上图可以通俗化：
-
-客户端：老弟，我这边没数据要传了，咱们关闭链接吧
-
-服务端：好的，接收到了，我看看我这边还有没有要传的
-
-服务端：我这边也没有了，关闭吧
-
-客户端：好嘞
-</code></pre><h2 id="7、浏览器解析资源"><a href="#7、浏览器解析资源" class="headerlink" title="7、浏览器解析资源"></a>7、浏览器解析资源</h2><p>对于获取到的HTML、CSS、JS、图片等等资源。</p>
-<p>浏览器通过解析HTML，生成DOM树，解析CSS，生成CSS规则树，然后通过DOM树和CSS规则树生成渲染树。渲染树与DOM树不同，渲染树中并没有head、display为none等不必显示的节点。</p>
-<p>在解析CSS的同时，可以继续加载解析HTML，但在解析执行JS脚本时，会停止解析后续HTML，这就会出现阻塞问题，关于JS阻塞相关问题，这里不过多阐述,后面会单独开篇讲解。<br><img src="https://user-gold-cdn.xitu.io/2018/2/22/161bb3c9b220f8cb?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
-<h2 id="8、浏览器布局渲染"><a href="#8、浏览器布局渲染" class="headerlink" title="8、浏览器布局渲染"></a>8、浏览器布局渲染</h2><p>根据渲染树布局，计算CSS样式，即每个节点在页面中的大小和位置等几何信息。HTML默认是流式布局的，CSS和js会打破这种布局，改变DOM的外观样式以及大小和位置。这时就要提到两个重要概念：repaint和reflow。</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 请在 sum函数中调用此函数，完成数值计算</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; a 要相加的第一个值</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; b 要相加的第二个值</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; callback 相加之后的回调函数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncAdd</span>(<span class="params">a,b,callback</span>) </span>&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   callback(<span class="literal">null</span>, a+b)</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 请在此方法中调用asyncAdd方法，完成数值计算</span></span><br><span class="line"><span class="comment"> * @param  &#123;...any&#125; rest 传入的参数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">...rest</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 请在此处完善代码</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> start = <span class="built_in">window</span>.performance.now()</span><br><span class="line">sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 请保证在调用sum方法之后，返回结果21</span></span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`程序执行共耗时: <span class="subst">$&#123;<span class="built_in">window</span>.performance.now() - start&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>本题根据程序输出时间不同,可以划分为三个难度等级</p>
 <ul>
-<li><p>repaint：屏幕的一部分重画，不影响整体布局，比如某个CSS的背景色变了，但元素的几何尺寸和位置不变。</p>
-</li>
-<li><p>reflow： 意味着元件的几何尺寸变了，我们需要重新验证并计算渲染树。是渲染树的一部分或全部发生了变化。这就是Reflow，或是Layout。</p>
-</li>
+<li>青铜难度， 输出时长大于6秒</li>
+<li>白银难度， 输出时长大于3秒</li>
+<li>王者难度， 输出时长大于1秒</li>
 </ul>
-<p>有些情况下，比如修改了元素的样式，浏览器并不会立刻 reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow，这又叫异步 reflow 或增量异步 reflow。</p>
-<p>有些情况下，比如 resize 窗口，改变了页面默认的字体等。对于这些操作，浏览器会马上进行 reflow。</p>
-<p>参考链接： <a href="https://www.cnblogs.com/yuanzhiguo/p/8119470.html" target="_blank" rel="noopener">从输入URL到浏览器显示页面发生了什么</a></p>
+<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><ul>
+<li>青铜难度</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">...rest</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 取出来第一个作为初始值</span></span><br><span class="line">  <span class="keyword">let</span> result = rest.shift()</span><br><span class="line">  <span class="comment">// 通过for of 遍历 rest, 依次相加</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> num <span class="keyword">of</span> rest) &#123;</span><br><span class="line">    <span class="comment">// 使用promise 获取相加结果</span></span><br><span class="line">    result = <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">      asyncAdd(result, num, (_,res) =&gt; &#123;</span><br><span class="line">        resolve(res)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 返回执行结果</span></span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行成功，执行时长大于6秒</span></span><br><span class="line">sum1(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>,<span class="number">6</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`计算结果为:<span class="subst">$&#123;res&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>白银难度</li>
+</ul>
+<p>在青铜难度，我们把数组里面的每一项依次相加。但是也可以进行一些优化，可以并发执行多个，比如 sum(1,2,3,4,5,6)，可以同时执行 1+2,3+4,5+6,这样就可以提升执行效率</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">...rest</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 如果传的值少于2个，则直接返回</span></span><br><span class="line">  <span class="keyword">if</span> (rest.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> rest[<span class="number">0</span>] || <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> promises = []</span><br><span class="line">  <span class="comment">// 遍历将数组里面的值两个两个的执行</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; rest.length; i += <span class="number">2</span>) &#123;</span><br><span class="line">    promises.push(</span><br><span class="line">      <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 如果 rest[i+1] 是 undefined, 说明数组长度是奇数，这个是最后一个</span></span><br><span class="line">        <span class="keyword">if</span> (rest[i + <span class="number">1</span>] === <span class="literal">undefined</span>) &#123;</span><br><span class="line">          resolve(rest[i])</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// 调用asyncAdd 进行计算</span></span><br><span class="line">          asyncAdd(rest[i], rest[i + <span class="number">1</span>], (_, result) =&gt; &#123;</span><br><span class="line">            resolve(result)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 获取第一次计算结果</span></span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="built_in">Promise</span>.all(promises)</span><br><span class="line">  <span class="comment">// 然后将第一次获取到的结果即 [3,7,11] 再次调用 sum执行</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> sum(...result)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行成功，执行时长大于3秒小于4秒</span></span><br><span class="line">sum1(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>,<span class="number">6</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`计算结果为:<span class="subst">$&#123;res&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>王者难度</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">...rest</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="number">0</span></span><br><span class="line">  <span class="comment">// 隐氏类型转换， 对象 + 数字，会先调用对象的toString 方法</span></span><br><span class="line">  <span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line">  obj.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> promises = []</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> num <span class="keyword">of</span> rest) &#123;</span><br><span class="line">    promises.push(<span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      asyncAdd(obj, num, (_, res) =&gt; &#123;</span><br><span class="line">        resolve(res)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 在这里将 result的值改变之后，obj.toString 的返回值就变了，这时候下一个setTimeout调用时就使用了新值</span></span><br><span class="line">      result = res</span><br><span class="line">    &#125;))</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.all(promises)</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行成功，执行时长大于1秒小于2秒</span></span><br><span class="line">sum1(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>,<span class="number">6</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`计算结果为:<span class="subst">$&#123;res&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>因为js是执行在单线程里面的，所以上面的代码，我们在for of将所有的计算放到promises数组里面，然后通过Promise.all去一次性执行，这时候并不需要考虑到底先执行哪两个数字相加。因为单线程的原因，我们可以保证这几个Promise是依次执行的，这时候obj.toString返回值就是上一个Promise的返回值，多跑几遍代码你就懂了。</p>
 
       </div>
         
@@ -306,16 +278,16 @@
             <hr>
             <div class="new-meta-box">
               
-                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-01T18:08:09+08:00">
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-27T17:05:03+08:00">
                   <a class="notlink">
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                    2020-08-01
+                    2021-03-27
                   </a>
                 </div>
               
               
                 
-                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/读书笔记/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;读书笔记</a></div>
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/JS/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;JS</a></div>
               
               
             </div>
@@ -325,40 +297,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                            <h4>
-                                <a href="/what-I-installed-in-my-mac.html" rel="prev" title="我的 Mac 上都装了啥">
-                                  
-                                      我的 Mac 上都装了啥
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/好物推荐/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>好物推荐</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/micro-front-end.html" rel="prev" title="什么是微前端">
+                                <a href="/design-pattern-facade.html" rel="prev" title="漫谈设计模式之门面模式">
                                     
-                                        什么是微前端
+                                        漫谈设计模式之门面模式
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/JS/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>JS</a>
+                                    <a class="tag" href="/tags/门面模式/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>门面模式</a>
                                 </h6>
                             
                         </span>
@@ -404,7 +357,7 @@
 
 <script>
     window.subData = {
-        title: '当向浏览器中输入URL后发生了什么',
+        title: '从一道题目探究promise的使用技巧',
         tools: true
     }
 </script>
@@ -463,7 +416,7 @@
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、输入网址"><span class="toc-text">1、输入网址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、浏览器查找域名的IP地址"><span class="toc-text">2、浏览器查找域名的IP地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、建立TCP链接"><span class="toc-text">3、建立TCP链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、浏览器向WEB服务器发起Http请求"><span class="toc-text">4、浏览器向WEB服务器发起Http请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、服务器端处理"><span class="toc-text">5、服务器端处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、关闭TCP链接"><span class="toc-text">6、关闭TCP链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、浏览器解析资源"><span class="toc-text">7、浏览器解析资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、浏览器布局渲染"><span class="toc-text">8、浏览器布局渲染</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#答案"><span class="toc-text">答案</span></a></li></ol>
     </div>
   </section>
 
