@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.rocwong.cn/js-design-pattern-in-biz.html</loc>
+    
+    <lastmod>2021-05-22T15:25:18.400Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.rocwong.cn/vue3-source-1.html</loc>
     
     <lastmod>2021-05-22T15:07:09.499Z</lastmod>
@@ -149,14 +156,14 @@
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/mind/index.html</loc>
+    <loc>http://www.rocwong.cn/project/index.html</loc>
     
     <lastmod>2020-08-01T10:08:09.391Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/project/index.html</loc>
+    <loc>http://www.rocwong.cn/mind/index.html</loc>
     
     <lastmod>2020-08-01T10:08:09.391Z</lastmod>
     
@@ -191,6 +198,13 @@
   </url>
   
   <url>
+    <loc>http://www.rocwong.cn/%E4%BD%BF%E7%94%A8Jenkins%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90GitHub%E9%A1%B9%E7%9B%AE.html</loc>
+    
+    <lastmod>2020-08-01T10:08:09.387Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.rocwong.cn/what-is-npx.html</loc>
     
     <lastmod>2020-08-01T10:08:09.387Z</lastmod>
@@ -199,13 +213,6 @@
   
   <url>
     <loc>http://www.rocwong.cn/%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8E%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97.html</loc>
-    
-    <lastmod>2020-08-01T10:08:09.387Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.rocwong.cn/%E4%BD%BF%E7%94%A8Jenkins%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90GitHub%E9%A1%B9%E7%9B%AE.html</loc>
     
     <lastmod>2020-08-01T10:08:09.387Z</lastmod>
     
@@ -226,14 +233,14 @@
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/what-happens-when-type-url-in-broswer.html</loc>
+    <loc>http://www.rocwong.cn/what-I-installed-in-my-mac.html</loc>
     
     <lastmod>2020-08-01T10:08:09.386Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/what-I-installed-in-my-mac.html</loc>
+    <loc>http://www.rocwong.cn/what-happens-when-type-url-in-broswer.html</loc>
     
     <lastmod>2020-08-01T10:08:09.386Z</lastmod>
     
@@ -275,14 +282,14 @@
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/puppeteer-for-dinner.html</loc>
+    <loc>http://www.rocwong.cn/micro-front-end.html</loc>
     
     <lastmod>2020-08-01T10:08:09.384Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/micro-front-end.html</loc>
+    <loc>http://www.rocwong.cn/puppeteer-for-dinner.html</loc>
     
     <lastmod>2020-08-01T10:08:09.384Z</lastmod>
     
@@ -303,13 +310,6 @@
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/feibonacci.html</loc>
-    
-    <lastmod>2020-08-01T10:08:09.383Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.rocwong.cn/fabricjs-setCoords.html</loc>
     
     <lastmod>2020-08-01T10:08:09.383Z</lastmod>
@@ -317,9 +317,9 @@
   </url>
   
   <url>
-    <loc>http://www.rocwong.cn/clean-code-js.html</loc>
+    <loc>http://www.rocwong.cn/feibonacci.html</loc>
     
-    <lastmod>2020-08-01T10:08:09.382Z</lastmod>
+    <lastmod>2020-08-01T10:08:09.383Z</lastmod>
     
   </url>
   
@@ -339,6 +339,13 @@
   
   <url>
     <loc>http://www.rocwong.cn/design-pattern-singleton.html</loc>
+    
+    <lastmod>2020-08-01T10:08:09.382Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.rocwong.cn/clean-code-js.html</loc>
     
     <lastmod>2020-08-01T10:08:09.382Z</lastmod>
     
