@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>深入理解__proto__和prototype | RocWong&#39;s Blog</title>
+  <title>⚡️ 懒癌福利！一种全新的路由组织方式 —— 基于 vite 的插件介绍 | RocWong&#39;s Blog</title>
   
-  <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
+  <meta name="keywords" content="vue,vite, 前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
   
   
 
@@ -190,7 +190,7 @@
   <div class="meta" id="header-meta">
     
       
-          <h1 class="title">深入理解__proto__和prototype</h1>
+          <h1 class="title">⚡️ 懒癌福利！一种全新的路由组织方式 —— 基于 vite 的插件介绍</h1>
       
     
 
@@ -207,7 +207,7 @@
         <div class="new-meta-item date">
           <a class='notlink'>
             <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-            2018-05-10
+            2021-05-27
           </a>
         </div>
       
@@ -215,9 +215,9 @@
         
           
           <div class='new-meta-item category'>
-            <a href='/categories/基础原理/'>
+            <a href='/categories/vue/'>
               <i class="fas fa-folder-open" aria-hidden="true"></i>
-              基础原理
+              vue
             </a>
           </div>
         
@@ -242,29 +242,58 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>最近在收集面试题的时候发现了一些考查prototype的题目，然而很多都是一知半解的看完了，今天就深入理解一下prototype和__proto__ 。</p>
-<p>首先要明确的是：</p>
-<ol>
-<li>在JS里，万物皆对象。方法（Function）是对象，方法的原型(Function.prototype)是对象。因此，它们都会具有对象共有的特点。即：对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。<br>如：</li>
-</ol>
-<a id="more"></a>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Person.prototype.name = <span class="string">'Roc'</span>;</span><br><span class="line">Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype);<span class="comment">//&#123;name: "Roc", getName: ƒ, constructor: ƒ&#125;</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p.\__proto\___);<span class="comment">//&#123;name: "Roc", getName: ƒ, constructor: ƒ&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(p.constructor.prototype);<span class="comment">//&#123;name: "Roc", getName: ƒ, constructor: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
-<p>由此可以得出以上结论，以及：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">instance.constructor.prototype = instance.\__proto\__</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
-<li><p>方法(Function)这个特殊的对象，除了和其他对象一样有上述<em>proto</em>属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。</p>
-<img src="http://rocwong.oss-cn-beijing.aliyuncs.com/e83bca5f1d1e6bf359d1f75727968c11_r.jpg?Expires=1551454962&OSSAccessKeyId=TMP.AQEziqlazK_vGvNGPqzJu7yjdfGBLy9wQLs2jSIB-lymoRkmDZk2l3d2CNtkAAAwLAIUUUlWFhMnxeed4AZZY6rwLT-tankCFBvheikGPYe_HvmeqKwYPCv5o08Q&Signature=q6e3xOGBKJA1EhXGT%2FGKe1%2F5rms%3D" title="[prototype]">
-</li>
-</ol>
-<p>好啦，知道了这两个基本点，我们来看看上面这副图。</p>
+        <p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210527162713.png" alt></p>
+<p>以往我们在基于 <code>Vue</code> 或者 <code>react</code> 做页面开发时，往往需要通过安装 <code>vue-router</code> 或者 <code>react-router</code> ，然后手动编写其路由组织文件来完成文件对路由结构系统的映射，页面少的时候配置起来还不繁琐，但是当开发一些大型的中后台B端项目的时候，整个配置文件就会很大。有时候如果目录文件的组织结果和路由层级对应不上的话，在日后的开发维护中找起对应路由的文件时就会很繁琐。</p>
+ <a id="more"></a>
+<p><code>vite-plugin-pages</code> 就很好的解决了这个问题，无需任何路由组织文件，文件系统即路由系统！</p>
+<blockquote>
+<p>vue-plugin-pages 基于文件系统的路由生成器</p>
+</blockquote>
+<p>根据<code>pages</code>文件夹下的文件组织结构自动生成一个路由数组，输入到<code>Vue Router</code> 实例中，文件组件结构决定你的路由层级，每次在<code>pages</code>目录下新增一个<code>.vue</code>文件后，即可自动为你创建路由，无需其他配置！</p>
+<p>当然 <code>pages</code> 目录可以替换为你任何想要的目录名称，如<code>views</code>。 除了<code>.vue</code>文件，也支持 <code>markdown</code> 等格式在文件。</p>
+<p>目前对 <code>react</code> 的支持尚在实验阶段，当然你也可以访问<a href="https://www.npmjs.com/package/vite-plugin-pages" target="_blank" rel="noopener">它的主页</a>来了解更多内容。</p>
+<p>除此之外，对于常见的路由方式，它也提供了支持：</p>
+<h3 id="基础的路由映射"><a href="#基础的路由映射" class="headerlink" title="基础的路由映射"></a>基础的路由映射</h3><p><code>vue-plugin-pages</code>（后称 VPP ）会自动将<code>pages</code>目录下的文件映射成相同名字的路由：</p>
 <ul>
-<li>构造函数Foo()构造函数的原型属性Foo.prototype指向了原型对象，在原型对象里有共有的方法，所有构造函数声明的实例（这里是f1，f2）都可以共享这个方法。</li>
-<li>原型对象Foo.prototypeFoo.prototype保存着实例共享的方法，有一个指针constructor指回构造函数。</li>
-<li>实例f1和f2是Foo这个对象的两个实例，这两个对象也有属性__proto__，指向构造函数的原型对象，这样子就可以像上面1所说的访问原型对象的所有方法啦。</li>
-<li>另外：构造函数Foo()除了是方法，也是对象啊，它也有__proto__属性，指向谁呢？指向它的构造函数的原型对象呗。函数的构造函数不就是Function嘛，因此这里的__proto__指向了Function.prototype。其实除了Foo()，Function(), Object()也是一样的道理。原型对象也是对象啊，它的__proto__属性，又指向谁呢？同理，指向它的构造函数的原型对象呗。这里是Object.prototype.最后，Object.prototype的__proto__属性指向null。<br><strong>&gt; 总结</strong>：</li>
-<li>对象有属性__proto__,指向该对象的构造函数的原型对象。</li>
-<li>方法除了有属性__proto__,还有属性prototype，prototype指向该方法的原型对象。</li>
+<li>src/pages/users.vue -&gt; /users</li>
+<li>src/pages/users/profile.vue -&gt; /users/profile</li>
+<li>src/pages/settings.vue -&gt; /settings</li>
 </ul>
-<p>（本文系转载）<br>作者：doris<br>链接：<a href="https://www.zhihu.com/question/34183746/answer/58155878" target="_blank" rel="noopener">https://www.zhihu.com/question/34183746/answer/58155878</a><br>来源：知乎</p>
+<h3 id="默认索引路由"><a href="#默认索引路由" class="headerlink" title="默认索引路由"></a>默认索引路由</h3><p>以 <code>index</code> 命名的文件会自动当做路由的索引页：</p>
+<ul>
+<li>src/pages/index.vue -&gt; /</li>
+<li>src/pages/users/index.vue -&gt; /users</li>
+</ul>
+<h3 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h3><p>使用方括号来表示动态路由，文件夹和文件都可以动态哦：</p>
+<ul>
+<li>src/pages/users/[id].vue -&gt; /users/:id (/users/one)</li>
+<li>src/[user]/settings.vue -&gt; /:user/settings (/one/settings)</li>
+</ul>
+<p>动态参数需要通过 <code>props</code> 传入到目标页面，如 <code>src/pages/users/[id].vue</code> 路由 <code>/users/abc</code> 将需要传递如下参数：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="attr">"id"</span>: <span class="string">"abc"</span> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3><p>我们可以利用 <code>Vue Router</code> 子路由来创建嵌套布局。可以通过为父组件定义与包含子路由的目录相同的名称来定义父组件。</p>
+<p>当我们有如下的目录结构时：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">src/pages/</span><br><span class="line">  ├── users/</span><br><span class="line">  │  ├── [id].vue</span><br><span class="line">  │  └── index.vue</span><br><span class="line">  └── users.vue</span><br></pre></td></tr></table></figure>
+<p>将会得到如下的路由配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/users'</span>,</span><br><span class="line">    component: <span class="string">'/src/pages/users.vue'</span>,</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">''</span>,</span><br><span class="line">        component: <span class="string">'/src/pages/users/index.vue'</span>,</span><br><span class="line">        name: <span class="string">'users'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">':id'</span>,</span><br><span class="line">        component: <span class="string">'/src/pages/users/[id].vue'</span>,</span><br><span class="line">        name: <span class="string">'users-id'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h3 id="捕获所有路由"><a href="#捕获所有路由" class="headerlink" title="捕获所有路由"></a>捕获所有路由</h3><p>捕获所有路由使用包含省略号的方括号来表示：</p>
+<ul>
+<li>src/pages/[…all].vue -&gt; /* (/non-existent-page)</li>
+</ul>
+<p>省略号后的文字将用于命名路由，以及用作传递路由参数的属性名称。</p>
+<h2 id="配置及实现"><a href="#配置及实现" class="headerlink" title="配置及实现"></a>配置及实现</h2><p>首先使用vite新创建一个vue项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yarn</span></span><br><span class="line">yarn create @vitejs/app my-vue-app --template vue-ts</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> my-vue-app</span><br><span class="line"></span><br><span class="line">yarn add -D vite-plugin-pages</span><br><span class="line"></span><br><span class="line">yarn add vue-router@next</span><br></pre></td></tr></table></figure>
+<p>然后将以下代码添加到你的<code>vite.config.js</code>中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'@vitejs/plugin-vue'</span>;</span><br><span class="line"><span class="keyword">import</span> Pages <span class="keyword">from</span> <span class="string">'vite-plugin-pages'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    Vue(),</span><br><span class="line">    Pages()</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>修改 <code>main.ts</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">'vue-router'</span>;</span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">'virtual:generated-pages'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(routes);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span><br><span class="line">  history: createWebHistory(),</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = createApp(App);</span><br><span class="line"></span><br><span class="line">app.use(router);</span><br><span class="line"></span><br><span class="line">app.mount(<span class="string">'#app'</span>);</span><br></pre></td></tr></table></figure>
+<p>修改 <code>App.vue</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>到此为止已经完成了所有的配置及前置工作，接下来我们在 <code>src</code> 目录下创建 <code>pages</code> 目录，然后按照你的喜好添加文件吧，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">├── [...all].vue <span class="comment"># 捕获所有路由，常用于404</span></span><br><span class="line">├── about</span><br><span class="line">│   └── index.vue</span><br><span class="line">├── about.vue <span class="comment"># 通过/about来访问该页面</span></span><br><span class="line">├── blog  <span class="comment"># 通过/blog来访问</span></span><br><span class="line">│   ├── [id].vue <span class="comment"># 动态路由</span></span><br><span class="line">│   ├── index.vue</span><br><span class="line">│   └── today</span><br><span class="line">├── components.vue</span><br><span class="line">└── index.vue <span class="comment"># 当访问本地IP和端口号时的默认页面</span></span><br></pre></td></tr></table></figure>
+<p>如果想要添加其他的文件目录，可以通过修改<code>vite.config.js</code>中的<code>Pages - pagesDir</code>属性进行配置。</p>
+<p>以上目录的完整代码可以访问 <a href="https://github.com/rocwong-cn/try-vite-plugins" target="_blank" rel="noopener">try-vite-plugins</a> 来获取。</p>
+<p>原文链接：<a href></a></p>
 
       </div>
         
@@ -272,16 +301,16 @@
             <hr>
             <div class='new-meta-box'>
               
-                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-01T18:08:09+08:00">
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-27T16:31:41+08:00">
                   <a class='notlink'>
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                    2020-08-01
+                    2021-05-27
                   </a>
                 </div>
               
               
                 
-                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/原型链/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;原型链</a></div>
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/vite/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;vite</a></div>
               
               
             </div>
@@ -291,40 +320,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                            <h4>
-                                <a href="/HTML5学习笔记汇总.html" rel="prev" title="HTML5学习笔记汇总">
-                                  
-                                      HTML5学习笔记汇总
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/HTML5/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>HTML5</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/函数柯里化.html" rel="prev" title="函数柯里化">
+                                <a href="/vue3-source-1.html" rel="prev" title="【vue3源码学习系列】一、先导篇：看懂 vue.js 3.0 的优化">
                                     
-                                        函数柯里化
+                                        【vue3源码学习系列】一、先导篇：看懂 vue.js 3.0 的优化
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/柯里化/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>柯里化</a>
+                                    <a class="tag" href="/tags/vue/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>vue</a>
                                 </h6>
                             
                         </span>
@@ -370,7 +380,7 @@
 
 <script>
     window.subData = {
-        title: '深入理解__proto__和prototype',
+        title: '⚡️ 懒癌福利！一种全新的路由组织方式 —— 基于 vite 的插件介绍',
         tools: true
     }
 </script>
@@ -419,6 +429,20 @@
       
       
         
+  <section class='toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础的路由映射"><span class="toc-text">基础的路由映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#默认索引路由"><span class="toc-text">默认索引路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态路由"><span class="toc-text">动态路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#嵌套路由"><span class="toc-text">嵌套路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#捕获所有路由"><span class="toc-text">捕获所有路由</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置及实现"><span class="toc-text">配置及实现</span></a>
+    </div>
+  </section>
+
 
       
     
