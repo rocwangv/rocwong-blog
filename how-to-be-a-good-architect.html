@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>如何成为一名优秀的架构师 | RocWong&#39;s Blog</title>
+  
+  <meta name="keywords" content="前端,移动端,技术分享,算法,总结,react-native,RocWong,rocwong,rocwong-cn,王鹏的博客,rocwong's blog,rocwang,flutter,linux">
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+  <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar" class="pure"></div>
+</div>
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header pure">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          RocWong's Blog
+        
+      </a>
+			<div class='menu'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a id="home"
+								 class="nav flat-box" href="/">
+									<i class='fas fa-home fa-fw'></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="archives"
+								 class="nav flat-box" href="/archives/">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="books"
+								 class="nav flat-box" href="/books/">
+									<i class='fas fa-book fa-fw'></i>&nbsp;书单
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="mind"
+								 class="nav flat-box" href="/mind/">
+									<i class='fas fa-bolt fa-fw'></i>&nbsp;思维
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="friends"
+								 class="nav flat-box" href="/friends/">
+									<i class='fas fa-link fa-fw'></i>&nbsp;友链
+								</a>
+							</li>
+      			
+  						<li>
+								<a id="about"
+								 class="nav flat-box" href="/about/">
+									<i class='fas fa-user fa-fw'></i>&nbsp;关于
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<span class="icon"><i class="fas fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+				<li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu">
+      <ul>
+          
+              
+                  <li>
+										<a id="home" class="nav flat-box" href="/">
+											<i class='fas fa-home fa-fw'></i>&nbsp;主页
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="archives" class="nav flat-box" href="/archives/">
+											<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="books" class="nav flat-box" href="/books/">
+											<i class='fas fa-book fa-fw'></i>&nbsp;书单
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="mind" class="nav flat-box" href="/mind/">
+											<i class='fas fa-bolt fa-fw'></i>&nbsp;思维
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="friends" class="nav flat-box" href="/friends/">
+											<i class='fas fa-link fa-fw'></i>&nbsp;友链
+										</a>
+                  </li>
+              
+                  <li>
+										<a id="about" class="nav flat-box" href="/about/">
+											<i class='fas fa-user fa-fw'></i>&nbsp;关于
+										</a>
+                  </li>
+              
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+  
+<section class='meta'>
+  
+  
+  <div class="meta" id="header-meta">
+    
+      
+          <h1 class="title">如何成为一名优秀的架构师</h1>
+      
+    
+
+    <div class='new-meta-box'>
+      
+        <div class='new-meta-item author'>
+          <a href="http://www.rocwong.cn">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            RocWong
+          </a>
+        </div>
+      
+      
+        <div class="new-meta-item date">
+          <a class='notlink'>
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+            2021-05-29
+          </a>
+        </div>
+      
+      
+        
+          
+          <div class='new-meta-item category'>
+            <a href='/categories/进阶心法/'>
+              <i class="fas fa-folder-open" aria-hidden="true"></i>
+              进阶心法
+            </a>
+          </div>
+        
+      
+      
+        
+          <div class="new-meta-item browse busuanzi">
+            <a class='notlink'>
+              <i class="fas fa-eye" aria-hidden="true"></i>
+              <span id="busuanzi_value_page_pv">
+                <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        
+      
+      
+    </div>
+    <hr>
+  </div>
+</section>
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <blockquote>
+<p>码字不宜，你的赞将是我持续更新创作的动力。</p>
+</blockquote>
+<p>架构师，是一个神秘而又神圣的存在，每个刚入行的程序员提及于此，无不露出心驰神往而又望而生畏的复杂神情。</p>
+ <a id="more"></a>
+<p>然而，如何成为一名架构师却一直没有一个统一的路径，本周末参与了 QCon，会上郭东白老师的分享对我启发很大，之前自己也学习过一些关于架构师的课，于此，一起聊聊我心中的所想。</p>
+<h2 id="兼职架构师-amp-全职架构师"><a href="#兼职架构师-amp-全职架构师" class="headerlink" title="兼职架构师 &amp; 全职架构师"></a>兼职架构师 &amp; 全职架构师</h2><p>一般地，那些因为还内部技术债或者由于业务机会优先，面对内部积累问题的复杂度较高时自行解决某个问题的角色称之为兼职架构师，他的真实身份可能是一个软件开发工程师、项目经理等。但是由于机会驱动或内部临时需要架构师这样一个角色时，他站出来了，我们称之为兼职架构师。</p>
+<p>相对应的，全职架构师的就是指在一个异构组织内，由于长期地战略需要，或者竞争带来目标的不确定性而需要的这样一种角色。由他来制定方案，别人进行实施。</p>
+<p>无论是全职架构师还是兼职架构师，其核心能力都是要具备一定的架构能力，<strong>集众家之所长，虑时事、虑事实、虑实事、虑适时、虑实时</strong>，当你具备这“5 虑”，还需要具备一定的宏观视角和微观视角，时刻以一种跳入跳出的姿势来看待问题，躬身入局，才能做到既纵观全局，又细致入微。</p>
+<h2 id="架构师的生存之必要条件一：目标正确"><a href="#架构师的生存之必要条件一：目标正确" class="headerlink" title="架构师的生存之必要条件一：目标正确"></a>架构师的生存之必要条件一：目标正确</h2><p>不论是刚入门的兼职架构师还是资深的全职架构师，最常见的架构失误就是对限制条件和目标价值产生理解偏差。</p>
+<p>一个优秀的架构师应该具备对软件做出正确的设计和决策的基本能力，在做这些决策时往往需要考虑很多限制条件，如：时间成本、人力成本、资金成本、范围要求、质量要求、组织结构等，架构师从来不是独行侠，他是上承需求，下接实现的一种角色。上承需求就需要我们经常的走进客户，了解他们的真实需求及体验反馈；下接实现就需要我们根据客户的需求（产品经理的需求）来对业务分解，从而架构出高可用、高扩展、高伸缩性的系统架构。架构说到底还是为业务赋能，脱离了业务的架构只是一堆空壳子，即使满足了上面的 “三高” ，它也不是一个成功的架构。</p>
+<p>一个好的架构还应该具备最大化某种价值的能力，如：社会价值、商业价值、员工价值、某种能力（高可用、高扩展、高伸缩性等等）、代码寿命等。当然，这也是技术服务业务的一种体现。</p>
+<h2 id="架构师总是必要的吗？"><a href="#架构师总是必要的吗？" class="headerlink" title="架构师总是必要的吗？"></a>架构师总是必要的吗？</h2><p>灵魂三问：</p>
+<ul>
+<li>你们公司有架构师这个角色吗？</li>
+<li>你们公司目前需要架构师这个角色吗？</li>
+<li>你觉得你们公司的架构师做的架构能提升你们的业务质量吗？</li>
+</ul>
+<p>不一定。小的软件研发机构不一定需要全职架构师。因为架构和设计能力是个基本的软件研发者的能力，每个研发或多或少都具备。全职架构师只有在足够激烈的竞争环境下，复杂的组织中，长期视角和顶层设计缺乏，团队合作低效的情况下才创造足够大的价值。</p>
+<p><strong>对任何一家公司，架构师不是必要的，但是架构设计永远是必要的。</strong></p>
+<h2 id="架构师的生存之必要条件二：能力满足"><a href="#架构师的生存之必要条件二：能力满足" class="headerlink" title="架构师的生存之必要条件二：能力满足"></a>架构师的生存之必要条件二：能力满足</h2><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210530111258.png" alt></p>
+<p>想要成为一个架构师首先要具备图中的基本能力，只有满足了这些能力，才能更大化的创造价值，能够基于当前资源做出最好的权衡取舍，最低成本的满足用户的需求，基于业务控制技术方向，控制公司整体风险，为未来扩展做好规划。</p>
+<h2 id="架构如何才能抵制熵增呢？"><a href="#架构如何才能抵制熵增呢？" class="headerlink" title="架构如何才能抵制熵增呢？"></a>架构如何才能抵制熵增呢？</h2><blockquote>
+<p>孤立系统总是趋向于熵增，最终达到熵的最大状态，也就是系统的最混乱无序状态。但是，对开放系统而言，由于它可以将内部能量交换产生的熵增通过向环境释放热量的方式转移，所以开放系统有可能趋向熵减而达到有序状态。熵增的热力学理论与几率学理论结合，产生形而上的哲学指导意义：事物的混乱程度越高，则其几率越大。</p>
+</blockquote>
+<p>通俗的讲就是系统会随着时间的推移变得越来越乱。</p>
+<p>具体到软件系统，随着时间的推移，无论是开发还是维护，都会增加系统的复杂度，越多的代码进入，则越容易造成混乱，软件架构也越容易被破坏。因此，软件架构在设计时就要考虑如何抵制熵增的问题。</p>
+<p>总体而言，我觉得可以从四个方面来减少熵增的产生：</p>
+<p>首先，<strong>从架构设计本身出发。</strong>架构设计中，要充分考虑未来的可变性，将系统中的可变部分和不可变部分在前期就分析出来，将易变部分进行隔离。使用设计原则和设计模式，从软件的整体上把握架构的演化方向，从而提前识别开发和维护对架构的影响。</p>
+<p>其次，<strong>架构必须要在团队中取得一致的认识。</strong> 尤其是技术团队中，任何一名开发人员都应该充分理解软件架构，明确自己的代码在整体中的位置，与其他组件的关系和通讯渠道。无论采用何种开发模型，都不应该因此放弃架构在开发人员认知中的重要性。只有如此，组件开发人员才能在整体架构下进行局部设计，并且能保持架构风格的延续性。否则就易于出现局部结构不符合整体架构，从而引发系统走向混乱。</p>
+<p>再次，<strong>设计评审或代码评审也可以有效减少熵增的发生。</strong> 设计评审是实现之前的预防，代码评审是实现中的质量保证，两者都可以对架构的一致性起到保证作用，而且在具体的实现中可以反作用于架构的调整，是架构师、技术经理经常采用的管理方法。</p>
+<p>最后，<strong>就是主动调整架构。</strong> 架构师不可能预测未来，当变化来临时，要主动的调整架构以适应变化，而不是被动的迁就，靠代码技巧来应对变化。那样的话，就已经从架构上主动进行了熵增，是混乱之源。</p>
+<h2 id="成为一个优秀架构师的充分条件是什么？"><a href="#成为一个优秀架构师的充分条件是什么？" class="headerlink" title="成为一个优秀架构师的充分条件是什么？"></a>成为一个优秀架构师的充分条件是什么？</h2><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210530112140.png" alt></p>
+<blockquote>
+<p>圣家族大教堂（加泰罗尼亚语：Basílica i Temple Expiatori de la Sagrada Família），又译作神圣家族大教堂，简称圣家堂（Sagrada Família），是位于西班牙加泰罗尼亚巴塞罗那的一座罗马天主教大型教堂，由西班牙建筑师安东尼奥·高迪（1852–1926）设计。尽管教堂还未竣工，但已被联合国教科文组织选为世界遗产。2010年11月，教皇本笃十六世将教堂封为宗座圣殿。</p>
+</blockquote>
+<p>一个优秀的架构师要为一个组织创造出好的设计。</p>
+<h3 id="1-一个好的设计是一个发现和创造的过程，不是靠记忆和知识。"><a href="#1-一个好的设计是一个发现和创造的过程，不是靠记忆和知识。" class="headerlink" title="1. 一个好的设计是一个发现和创造的过程，不是靠记忆和知识。"></a>1. 一个好的设计是一个发现和创造的过程，不是靠记忆和知识。</h3><!-- ##- 架构师要有途径的保障他的设计的高质量交付。 -->
+<p>架构之美在于悟。 信息世界是无中生有创造出来的，我们不需要去记忆，而是要找到创造背后的骨架和逻辑。</p>
+<p><strong>架构即创造。</strong></p>
+<p>学架构在于匠心和悟心。它靠的是悟，不是记忆。<strong>用思考的方式去记忆，而不是用记忆的方式去思考。</strong></p>
+<p>一个优秀的架构师，如何构建需求分析能力，尤其是需求的预判能力？</p>
+<p><strong>首先，归纳总结能力很重要。</strong> 分析现象背后的原因，并对未来可能性进行推测。判断错了并不要紧，分析一下你的推测哪些地方漏判了，哪些重要信息没有考虑到。<br><strong>另外，批判精神也同样至关重要。</strong> 批判不是无中生有的批评，而是切实找到技术中存在的效率瓶颈和心智负担。尤其在你看经典书籍的时候，要善于找出现状与书的历史背景差异，总结技术演进的螺旋上升之路，培养科学的批判方法论。</p>
+<h3 id="2-一个好的设计必须要有更持久的外部适应性（技术实现对未来需求和外部环境变化的适应性）"><a href="#2-一个好的设计必须要有更持久的外部适应性（技术实现对未来需求和外部环境变化的适应性）" class="headerlink" title="2. 一个好的设计必须要有更持久的外部适应性（技术实现对未来需求和外部环境变化的适应性）"></a>2. 一个好的设计必须要有更持久的外部适应性（技术实现对未来需求和外部环境变化的适应性）</h3><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210530114623.png" alt></p>
+<p>我们通过对多个外部机会的抽象可以得到一个领域的产品化方案，通过对多个领域的产品化方案抽象可以得到一个架构，抽象有助于记忆，因为骨架需要逻辑的自洽。这种抽象能力之所以重要，是因为它是融会贯通、疏通整个信息世界的知识脉络的关键。当你做到对世界的认知可宏观、可微观，自然一切皆在掌握。我们的核心目标是以架构为导向，抽象出系统的骨架，融会贯通，把这些领域知识串起来，拼出完整的信息世界的版图。</p>
+<p>抽象的最终目标也是为了提升技术实现的外部适应性，只有你的架构抽象的足够好，最终反哺到业务的模型才能足够多。</p>
+<h2 id="架构师成长之术一：先要宽度还是先要深度？"><a href="#架构师成长之术一：先要宽度还是先要深度？" class="headerlink" title="架构师成长之术一：先要宽度还是先要深度？"></a>架构师成长之术一：先要宽度还是先要深度？</h2><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210530132527.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210530135433.png" alt></p>
+<p><strong>至少在一个领域的深度是扩展宽度的前提条件。</strong> 架构师并不是全才，但是在你想要成为一个架构师之前，你首先应该至少具备在某一个领域的深度，成为该领域的专家，这样不仅能够有一定的话语权，也能从你该领域的光环影射到其他领域，让你具备一定的隐性魅力。</p>
+<p>Tom 在计算机图形学方面取得过在世界范围内都很有影响力的成就，那他来做架构师，至少大家会觉得他有一个方面是能服众的，而且具备某个领域成就的人本身就已经反映出来他本身的智商、学习能力、自制力等综合素养，再去扩展宽度也是水到渠成的。</p>
+<p>宽度和广度如何训练呢？架构师的思考深度和实战经验远远比学历和知识重要，建议在研究机构或大公司里尽快练出深度之后到小公司里赌命求广度！</p>
+<h2 id="架构师成长之术二：深度思考和复盘"><a href="#架构师成长之术二：深度思考和复盘" class="headerlink" title="架构师成长之术二：深度思考和复盘"></a>架构师成长之术二：深度思考和复盘</h2><p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210530135134.png" alt></p>
+<p>架构师的价值创造来自于独立、理性的、有深度的思考。从技术视角看业务，从业务中发现技术机会。通过复盘发现思考漏洞，提升思考质量。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/rocwong-cn/assets/imags/20210530140021.png" alt></p>
+<p>深度思考能力的提升在于多进行独立思考，而不是一味的寻找现有的别人的解决方案往自己的业务实例中套。独立思考就要求我们有理性的思维、批判性的思维、敢于发出质疑并尝试提出自己的解决方案，在尊重事实和规律的前提下，基于洞察和推理挑战常规，鼓励创新，敢于创新。当你做到这些后，你就离发现真理，引领变革不远了。</p>
+<p>一个好的架构是被创造出来的，靠的是高质量的洞察和对真理的持续逼近。</p>
+<h2 id="架构师成长之术三：全职架构师的成长过程及价值创造"><a href="#架构师成长之术三：全职架构师的成长过程及价值创造" class="headerlink" title="架构师成长之术三：全职架构师的成长过程及价值创造"></a>架构师成长之术三：全职架构师的成长过程及价值创造</h2><p>架构师的价值创造点选择主要集中在：</p>
+<ul>
+<li>为软件系统找到更好的整体设计</li>
+<li>为组织创造更高效的研发体系</li>
+<li>为企业的未来做技术布局</li>
+</ul>
+<p>成长过程也能由浅入深的分为以下四个等级：</p>
+<ul>
+<li>项目级：解决技术难题，提升专业领域的技术深度，获取口碑和机会；</li>
+<li>系统级：从周边场景过渡到关键场景，款系统跨领域做出正确技术选择和风险取舍；</li>
+<li>组织级：帮助组织做出艰难但是正确的选择，在多个团队间寻找长期提升的研发效率的方法；</li>
+<li>企业级：为企业做前瞻性架构布局且取得持续商业成功</li>
+</ul>
+<p>在这个持续进化的过程中，经验能力和勇气的提升尤为重要。经验自然不用多数，来源于面对复杂场景下满足业务需求的能力。勇气更多的时候指的是，面对无人敢承担的责任与重担时，你敢接过单子的勇气；来自于需要跨多个团队、部门协调资源时你敢向前一步的决心；来自于发生故障、线上问题时你敢于站在团队前面抗起责任的坚毅（敢于背锅）。</p>
+<p>在架构师成长的过程中，对环境也有严格的要求，不是任何环境都适于架构师的成长，架构师需要企业对创新和探索的信任、授权、时间和资源的可调度、可支配。更需要一个包容和求真的企业文化，要求企业对错误有容忍性，基于理性的思考，实证和互相尊重的思想碰撞环境。</p>
+<h2 id="最后，优秀架构师的正确打开方式"><a href="#最后，优秀架构师的正确打开方式" class="headerlink" title="最后，优秀架构师的正确打开方式"></a>最后，优秀架构师的正确打开方式</h2><p>一个优秀的架构师应该是一个德才兼备的人。</p>
+<ul>
+<li>德：有良知，为人正直，以企业长期利益优先；有勇气，有勇气面临冲突，坚持引导组织做正确的事。</li>
+<li>才：要求架构师有眼光，有深度的业务理解，看到并能抓住好的机会；善思考，有足够的技术视野，找到正确的技术和组织设计。</li>
+</ul>
+<p>一个优秀的架构师始于理性思考，成于科学实践。</p>
+<ul>
+<li>架构师的价值创造来自于独立, 理性的, 有深度的思考。</li>
+<li>一个好的架构是被发现的, 靠的高质量的洞察和对真理的持续逼近。</li>
+<li>架构师要基于良知为组织持续做出正确判断。</li>
+<li>长期感召力来自于良知和成功经验所带来的信心和勇气。</li>
+</ul>
+<p>架构师需要放下技术人的身段，学会 “共情”。与用户共情，理解用户的所思所想。与开发人员共情，理解技术人的所思所想。与公司共情，理解公司的发展诉求。架构师需要学会 “认同他人，反思迭代自己”。不要在不了解背景的情况下，随意推翻别人写的代码，而理由可能仅仅是不符合你的个人风格。当然反过来完全看不到项目的问题同样要不得，但这往往是受限于个人能力。要提升自己的架构水平，需要在实践中不断反思，不断在自我否定中成长。</p>
+<p>最后希望大家看完本篇本章都有所得，有所悟，如果对于文章中的观点有任何疑问或者不认同的地方，欢迎您在评论区留言，一起交流，共同进步！</p>
+
+      </div>
+        
+          <section class='meta' id="footer-meta">
+            <hr>
+            <div class='new-meta-box'>
+              
+                <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-30T14:24:22+08:00">
+                  <a class='notlink'>
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    2021-05-30
+                  </a>
+                </div>
+              
+              
+                
+                <div class="new-meta-item meta-tags"><a class="tag" href="/tags/架构师/"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;架构师</a></div>
+              
+              
+            </div>
+          </section>
+        
+
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/vite-plugin-pages-layouts.html" rel="prev" title="⚡️ 懒癌福利！一种全新的路由组织方式 —— 基于 vite 的插件介绍">
+                                    
+                                        ⚡️ 懒癌福利！一种全新的路由组织方式 —— 基于 vite 的插件介绍
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/vite/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>vite</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      
+      
+        <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+        
+        
+        
+          
+            <section id="comments">
+              <div id="valine_container" class="valine_thread">
+                <i class="fas fa-spinner fa-spin fa-fw"></i>
+              </div>
+            </section>
+          
+        
+      
+    </section>
+  </article>
+
+
+
+<script>
+    window.subData = {
+        title: '如何成为一名优秀的架构师',
+        tools: true
+    }
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+  
+  
+    
+      
+      
+        <section class='author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://cdn.jsdelivr.net/gh/rocwong-cn/assets/avatar/avatar.png'/>
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:me@rocwong.cn" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-envelope" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://github.com/rocwong-cn" class="social flat-btn" target="_blank" rel="external"><i class="social fab fa-github" aria-hidden="true"></i></a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=64405940" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-music" aria-hidden="true"></i></a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+      
+    
+  
+    
+      
+      
+        
+  <section class='toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#兼职架构师-amp-全职架构师"><span class="toc-text">兼职架构师 &amp; 全职架构师</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构师的生存之必要条件一：目标正确"><span class="toc-text">架构师的生存之必要条件一：目标正确</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构师总是必要的吗？"><span class="toc-text">架构师总是必要的吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构师的生存之必要条件二：能力满足"><span class="toc-text">架构师的生存之必要条件二：能力满足</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构如何才能抵制熵增呢？"><span class="toc-text">架构如何才能抵制熵增呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成为一个优秀架构师的充分条件是什么？"><span class="toc-text">成为一个优秀架构师的充分条件是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-一个好的设计是一个发现和创造的过程，不是靠记忆和知识。"><span class="toc-text">1. 一个好的设计是一个发现和创造的过程，不是靠记忆和知识。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-一个好的设计必须要有更持久的外部适应性（技术实现对未来需求和外部环境变化的适应性）"><span class="toc-text">2. 一个好的设计必须要有更持久的外部适应性（技术实现对未来需求和外部环境变化的适应性）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构师成长之术一：先要宽度还是先要深度？"><span class="toc-text">架构师成长之术一：先要宽度还是先要深度？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构师成长之术二：深度思考和复盘"><span class="toc-text">架构师成长之术二：深度思考和复盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构师成长之术三：全职架构师的成长过程及价值创造"><span class="toc-text">架构师成长之术三：全职架构师的成长过程及价值创造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后，优秀架构师的正确打开方式"><span class="toc-text">最后，优秀架构师的正确打开方式</span></a></li></ol>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class='tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/AI/" style="font-size: 14px; color: #999">AI</a> <a href="/tags/HTML5/" style="font-size: 14px; color: #999">HTML5</a> <a href="/tags/Homebrew/" style="font-size: 14px; color: #999">Homebrew</a> <a href="/tags/JS/" style="font-size: 24px; color: #555">JS</a> <a href="/tags/Jenkins/" style="font-size: 14px; color: #999">Jenkins</a> <a href="/tags/PWA/" style="font-size: 14px; color: #999">PWA</a> <a href="/tags/React-Native/" style="font-size: 14px; color: #999">React-Native</a> <a href="/tags/android/" style="font-size: 14px; color: #999">android</a> <a href="/tags/canvas/" style="font-size: 14px; color: #999">canvas</a> <a href="/tags/centos/" style="font-size: 14px; color: #999">centos</a> <a href="/tags/commitlint/" style="font-size: 14px; color: #999">commitlint</a> <a href="/tags/puppeteer/" style="font-size: 14px; color: #999">puppeteer</a> <a href="/tags/react/" style="font-size: 14px; color: #999">react</a> <a href="/tags/typescript/" style="font-size: 14px; color: #999">typescript</a> <a href="/tags/vite/" style="font-size: 14px; color: #999">vite</a> <a href="/tags/vue/" style="font-size: 17.33px; color: #828282">vue</a> <a href="/tags/位移运算/" style="font-size: 14px; color: #999">位移运算</a> <a href="/tags/单例模式/" style="font-size: 14px; color: #999">单例模式</a> <a href="/tags/原型链/" style="font-size: 14px; color: #999">原型链</a> <a href="/tags/又是一年/" style="font-size: 20.67px; color: #6c6c6c">又是一年</a> <a href="/tags/好物推荐/" style="font-size: 17.33px; color: #828282">好物推荐</a> <a href="/tags/工厂模式/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/数据结构/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/构建工具/" style="font-size: 14px; color: #999">构建工具</a> <a href="/tags/架构师/" style="font-size: 14px; color: #999">架构师</a> <a href="/tags/柯里化/" style="font-size: 14px; color: #999">柯里化</a> <a href="/tags/观察者模式/" style="font-size: 14px; color: #999">观察者模式</a> <a href="/tags/设计模式/" style="font-size: 14px; color: #999">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 20.67px; color: #6c6c6c">读书笔记</a> <a href="/tags/责任链模式/" style="font-size: 14px; color: #999">责任链模式</a> <a href="/tags/进程与线程/" style="font-size: 14px; color: #999">进程与线程</a> <a href="/tags/门面模式/" style="font-size: 14px; color: #999">门面模式</a> <a href="/tags/面试经历/" style="font-size: 14px; color: #999">面试经历</a> <a href="/tags/项目与组织/" style="font-size: 14px; color: #999">项目与组织</a> <a href="/tags/项目与项目经理/" style="font-size: 14px; color: #999">项目与项目经理</a> <a href="/tags/项目管理/" style="font-size: 14px; color: #999">项目管理</a>
+    </div>
+  </section>
+
+
+      
+    
+  
+    
+      
+      
+        
+  <section class='category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;所有分类</div>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/PMP之路/" href="/categories/PMP之路/"><div class='name'>PMP之路</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/fabricjs/" href="/categories/fabricjs/"><div class='name'>fabricjs</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/vue/" href="/categories/vue/"><div class='name'>vue</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/前端工程化/" href="/categories/前端工程化/"><div class='name'>前端工程化</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/基础原理/" href="/categories/基础原理/"><div class='name'>基础原理</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/学习笔记/" href="/categories/学习笔记/"><div class='name'>学习笔记</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/年终总结/" href="/categories/年终总结/"><div class='name'>年终总结</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/微前端/" href="/categories/微前端/"><div class='name'>微前端</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/我爱折腾/" href="/categories/我爱折腾/"><div class='name'>我爱折腾</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/服务器操作/" href="/categories/服务器操作/"><div class='name'>服务器操作</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/每日一题/" href="/categories/每日一题/"><div class='name'>每日一题</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/浏览器/" href="/categories/浏览器/"><div class='name'>浏览器</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/移动端开发/" href="/categories/移动端开发/"><div class='name'>移动端开发</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/算法相关/" href="/categories/算法相关/"><div class='name'>算法相关</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/编码规范/" href="/categories/编码规范/"><div class='name'>编码规范</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/装机必备/" href="/categories/装机必备/"><div class='name'>装机必备</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/设计模式/" href="/categories/设计模式/"><div class='name'>设计模式</div><div class='badge'>(9)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/译文/" href="/categories/译文/"><div class='name'>译文</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/进阶心法/" href="/categories/进阶心法/"><div class='name'>进阶心法</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/项目部署/" href="/categories/项目部署/"><div class='name'>项目部署</div><div class='badge'>(3)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+      
+    
+  
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+    </div>
+    <footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:me@rocwong.cn" class="social fas fa-envelope flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://github.com/rocwong-cn" class="social fab fa-github flat-btn" target="_blank" rel="external"></a>
+        
+      
+        
+          <a href="https://music.163.com/#/user/home?id=64405940" class="social fas fa-music flat-btn" target="_blank" rel="external"></a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>本站使用 <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a> 作为主题，总访问量为 <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+  </div>
+  <div><a href="http://www.beian.miit.gov.cn/" rel="nofollow">京ICP备18022839号-1</a></div>
+</footer>
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        const $reveal = $('.reveal');
+    		if ($reveal.length === 0) return;
+    		const sr = ScrollReveal({ distance: 0 });
+    		sr.reveal('.reveal');
+      });
+    </script>
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        Waves.attach('.flat-btn', ['waves-button']);
+        Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+        Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+        Waves.attach('.flat-box', ['waves-block']);
+        Waves.attach('.float-box', ['waves-block', 'waves-float']);
+        Waves.attach('.waves-image');
+        Waves.init();
+      });
+    </script>
+  
+  
+    <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+  
+  
+  
+
+  
+  
+    
+      
+      
+      
+        
+          <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+          
+            
+              <script src="/js/volantis.js"></script>
+            
+          
+          <script>
+          var GUEST_INFO = ['nick','mail','link'];
+          var guest_info = 'nick'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var notify = 'false' == true;
+          var verify = 'false' == true;
+          var valine = new Valine();
+          valine.init({
+            el: '#valine_container',
+            notify: notify,
+            verify: verify,
+            guest_info: guest_info,
+            
+            appId: "30nzlf075w2SKfJmluXW7TGW-gzGzoHsz",
+            appKey: "7MTtGoEYzq1gPxmFrGIW19UI",
+            placeholder: "快来评论吧~",
+            pageSize:'10',
+            avatar:'monsterid',
+            lang:'zh-cn',
+            highlight:''
+          })
+          </script>
+        
+      
+    
+  
+  
+    <script src="/js/app.js"></script>
+<script src="/js/search.js"></script>
+  
+
+
+
+
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
