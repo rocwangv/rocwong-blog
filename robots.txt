@@ -7,5 +7,5 @@ Disallow: /project/
 Disallow: /friends/
 Disallow: /about/
 
-Sitemap: http://www.rocwong.cn/sitemap.xml
-Sitemap: http://www.rocwong.cn/baidusitemap.xml
+Sitemap: http://rocwong-cn.github.io/sitemap.xml
+Sitemap: http://rocwong-cn.github.io/baidusitemap.xml
